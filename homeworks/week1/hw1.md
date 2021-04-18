@@ -47,6 +47,7 @@
 3. 在 GitHub 部分完成後，會呈現下圖  
 ![open](./images/hw1_3_PR_hw_finish.png)
 <br/>
+1. 將自己的 pull reqeust 網址複製，並貼到學習系統的繳交作業。
 
 #### 三、助教改好作業：  
 在 GitHub 上，week1 branch 會被合併到 master 主幹裡面，所以 week1  branch 會被刪除。原作者（助教）合併表示收下協作者（我）的 request。  
