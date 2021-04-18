@@ -33,21 +33,23 @@
 1. 重新整理頁面：  
 [Lidemy/mentor-program-5th-estella00911](https://github.com/Lidemy/mentor-program-5th-estella00911)
 1. create pull request：  
-(1) 點選 compare & pull request  
+(1) 點選 compare & pull request
+ 
 ![compare_pullRequest](./images/hw1_1_compare_PR.png)
 <br/>  
 (2) 選擇將 week1 合併至 master（如圖所示為：master ← week1）  
 ![able to merge](./images/hw1_2_mergeOnGitHub.png)
 <br/>
 (3) 填寫好 title 和 content 後， create pull request 發通知給原作者。  
+
 ![create PR](./images/hw1_5_complete.png)
 <br/>
-3. 在 GitHub 部分完成後，會呈現下圖
+3. 在 GitHub 部分完成後，會呈現下圖  
 ![open](./images/hw1_3_PR_hw_finish.png)
 <br/>
 
 #### 三、助教改好作業：  
-在 GitHub 上，week1 branch 會被合併到 master 主幹裡面，所以 week1  branch 會被刪除。原作者（助教）合併表示收下協作者（我）的 request。
+在 GitHub 上，week1 branch 會被合併到 master 主幹裡面，所以 week1  branch 會被刪除。原作者（助教）合併表示收下協作者（我）的 request。  
 ![merge on GitHub](./images/hw1_4_assistant.png)
 
 #### 四、在 local 端刪除 week1 branch
