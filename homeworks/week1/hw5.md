@@ -1,10 +1,11 @@
 # hw5
-## 請解釋後端與前端的差異。
+### 請解釋後端與前端的差異。
 以 google 表單為例，眼睛看的到的介面，如排版（CSS）、文字（html）、使用者與網頁的互動與功能（JavaScript）屬於前端。後端是著重在看不到的地方，如：資料的儲存。當 google 表單送出，需要將表單內容作儲存。
-## 假設我今天去 Google 首頁搜尋框打上：JavaScript 並且按下 Enter，請說出從這一刻開始到我看到搜尋結果為止發生在背後的事情。
+<br/>
+### 假設我今天去 Google 首頁搜尋框打上：JavaScript 並且按下 Enter，請說出從這一刻開始到我看到搜尋結果為止發生在背後的事情。
 按 Enter 後，跟瀏覽器說送出 JavaScript 的 request，瀏覽器跟作業系統說送出 reqeust，作業系統跟網路說要送出 request 給 google 的 server，把資料送到 dataBase，google server 回傳 response 給網路，網路再把 response 交還給作業系統，之後作業系統把 response 給 chrome 瀏覽器，最後 google chrome 在顯示出結果。
-
-## 請列舉出 3 個「課程沒有提到」的 command line 指令並且說明功用
+<br/>
+### 請列舉出 3 個「課程沒有提到」的 command line 指令並且說明功用
 1. `chmod 754 modulelist`：更改檔案權限[1]
 ```bash
 ls -l modulelist
@@ -28,7 +29,7 @@ ls -l
 3. `head <fileName>`：印出檔案首幾行[3]
 若沒有寫印出檔案幾行，就是預設 10 行。若想要設定印出幾行，可以輸入`head -n <行數> <fileName>`
 
-參考：
+### 參考：
 [1] [鳥哥的私房菜 〈Linux 的檔案權限與目錄配置〉](http://linux.vbird.org/linux_basic/0210filepermission.php)
 [2] [鳥哥的私房菜 〈檔案與檔案系統的壓縮,打包與備份〉](http://linux.vbird.org/linux_basic/0240tarcompress.php)
 [3] [UNIX 常見指令教學](https://it.cs.nycu.edu.tw/unix-basic-commands)
