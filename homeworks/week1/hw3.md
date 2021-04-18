@@ -103,7 +103,7 @@ drwxr-xr-x  4 jeanlu  staff  128 Apr 17 20:07 test
 6. `mkdir <新資料夾名稱>`:
 建立資料夾。
 7. `mv <欲移動資料夾名稱> <相對/絕對路徑>`:
-(1)移動檔案，有相對路徑跟絕對路徑。
+(1) 移動檔案，有相對路徑跟絕對路徑。
 　- `mv <相對路徑>`: 
 ```bash
 pwd  #印出所在位置
@@ -131,7 +131,7 @@ github           practice
 mac matlab       vscode
 cd hw1.md  /Users/jeanlu/document #將 hw1.md 移動到 document 資料夾下
 ```
-(2)改名：
+(2) 改名：
 ```bash
 #複製檔案
 pwd #列印所在位置

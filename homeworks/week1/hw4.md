@@ -80,5 +80,6 @@ git clone https://github.com/estella00911/Practic_0320.git
 push 的相對是 pull，在 git 中，push 是將本地版本庫的檔案上傳到遠端版本庫，而 pull 就是從遠端版本庫下載檔案到本地版本庫。當遠端版本庫的檔案有做版本更新，此時版本與本地版本庫舊的版本不同，就需要將新的檔案從遠端版本庫抓下來更新到本地版本庫。
 
 ## 三、參考：
-[1] 《Github創辦人親自指導你精通Git》 Chacon Scott, Straub Ben著
+[1] 《Github創辦人親自指導你精通Git》 Chacon Scott, Straub Ben著  
+
 [2][「Git」基本觀念與操作](https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedium.com%2F%40lionel_0814%2Fgit-%25E5%259F%25BA%25E6%259C%25AC%25E8%25A7%2580%25E5%25BF%25B5%25E8%2588%2587%25E6%2593%258D%25E4%25BD%259C-32f5dd0913e3&psig=AOvVaw01_QBj3qQRVbKg7BF3Uhpg&ust=1618838902987000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIDdu4Hzh_ACFQAAAAAdAAAAABAP)

@@ -32,5 +32,7 @@ ls -l
 
 ### 參考：
 [1] [鳥哥的私房菜 〈Linux 的檔案權限與目錄配置〉](http://linux.vbird.org/linux_basic/0210filepermission.php)
+
 [2] [鳥哥的私房菜 〈檔案與檔案系統的壓縮,打包與備份〉](http://linux.vbird.org/linux_basic/0240tarcompress.php)
+
 [3] [UNIX 常見指令教學](https://it.cs.nycu.edu.tw/unix-basic-commands)
