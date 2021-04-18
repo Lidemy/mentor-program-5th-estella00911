@@ -32,7 +32,7 @@
 #### 二、在 GitHub 的 repository 上操作
 1. 重新整理頁面：  
 [Lidemy/mentor-program-5th-estella00911](https://github.com/Lidemy/mentor-program-5th-estella00911)
-1. create pull request：  
+2. create pull request：  
 (1) 點選 compare & pull request
  
 ![compare_pullRequest](./images/hw1_1_compare_PR.png)
