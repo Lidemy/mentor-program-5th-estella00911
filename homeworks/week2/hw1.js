@@ -6,10 +6,10 @@ function printStars(n) {
     for (let i = 0; i < n - 1; i++) {  //for loop to add '\n*'
       output += iterate;
     }  //endfor
-    return console.log(output);
+    console.log(output);
   }//endif
   else if (n == 1) {   //
-    return console.log(output);
+    console.log(output);
   }//end elseif
 }//end function
 

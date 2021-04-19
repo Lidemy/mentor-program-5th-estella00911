@@ -6,7 +6,7 @@ function reverse(str) {
         strReverse[i] = strSplit[indexOF];  // save the opposite order of alphabets
     }// end for
     str = strReverse.join("");  //combine each alphabet 
-    return console.log(str); //return 
+    console.log(str); //return 
 }//end function
 
 reverse('hello');

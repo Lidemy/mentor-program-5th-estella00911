@@ -8,7 +8,7 @@ function capitalize(str) {
         return console.log(str);  //return func
     }//end if
     else {
-        return console.log(str);
+        return str;
     }//end else
 }// end function
 
