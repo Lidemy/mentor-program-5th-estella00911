@@ -5,11 +5,14 @@ function capitalize(str) {
         var unicodeToCapitalAlphabet = String.fromCodePoint(AlphabetToUnicode - 32); // turn 1st alphabet into Capital
         strSplit[0] = unicodeToCapitalAlphabet; //replace the 1st alphabet of str into CAPTICAL
         str = strSplit.join("");  //combine seperate alphabets into a string.
-        return console.log(str);  //return func
+        return str;  //return func
     }//end if
     else {
         return str;
     }//end else
 }// end function
 
+
 console.log(capitalize('hello')); //test
+console.log(capitalize('Nick')); //test
+console.log(capitalize(',hello')); //test

@@ -13,4 +13,5 @@ function printStars(n) {
   }//end elseif
 }//end function
 
-printStars(5)
+
+printStars(3)
