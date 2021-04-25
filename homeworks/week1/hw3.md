@@ -138,7 +138,7 @@ pwd #列印所在位置
 /Users/jeanlu/document/practice
 ls #列出檔案清單
 hw1.md   week1  week2
-cp hw1.md homework1.md  #將 hw1.md 更名為 homework1.md
+mv hw1.md homework1.md  #將 hw1.md 更名為 homework1.md
 ls #列出檔案清單
 homework1.md  week1  week2
 ```
