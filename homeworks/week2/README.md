@@ -140,17 +140,17 @@ for(var i=59; i<=61; i++) {
 現在，請假裝自己是電腦，像是上面示範的那樣，一步步寫下底下這個程式的執行流程，並且試著猜猜看它在做什麼：
 
 ``` js
-function isValid(arr) {
-  for(var i=0; i<arr.length; i++) {
-    if (arr[i] <= 0) return 'invalid'
-  }
-  for(var i=2; i<arr.length; i++) {
-    if (arr[i] !== arr[i-1] + arr[i-2]) return 'invalid'
-  }
-  return 'valid'
-}
-
-isValid([3, 5, 8, 13, 22, 35])
+1function isValid(arr) {
+ 2 for(var i=0; i<arr.length; i++) {
+3    if (arr[i] <= 0) return 'invalid'
+ 4 }
+ 5 for(var i=2; i<arr.length; i++) {
+ 6   if (arr[i] !== arr[i-1] + arr[i-2]) return 'invalid'
+ 7 }
+8  return 'valid'
+9}
+10
+11 isValid([3, 5, 8, 13, 22, 35])
 ```
 
 請將答案寫在 [hw6.md](hw6.md)。
