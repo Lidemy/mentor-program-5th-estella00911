@@ -13,7 +13,7 @@
 1. **建立新的分支（branch），名稱為 week1 ：`git branch week1`**  
 2. **移至 week1 branch ：`git checkout week1`**  
 　- 可以使用 `git branch -v` 確認當前位在哪個 branch  
-　- `git branch -b week1` 同時建立新 branch ，也移動至該 branch。  
+　- `git checkout -b week1` 同時建立新 branch ，也移動至該 branch。  
 3. **查詢狀況 `git status`：**  
 查詢當前目錄狀態為 `Changes not staged for commit`（等待提交），表示該檔案修改後，尚未被提交（commit）至暫存區（stage）。  
 4. **加入版本控制 `git add <fileName>`：**  
