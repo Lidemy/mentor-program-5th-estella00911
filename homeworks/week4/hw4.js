@@ -9,7 +9,7 @@ request.get(
     }
   },
   (error, response, body) => {
-    if (!error && response.statusCode === 200) {
+    if (!error && response.statusCode >= 200 && response.statusCode < 300) {
       const json = JSON.parse(body)
       for (let i = 0; i < json.top.length; i++) {
         console.log(json.top[i].viewers, json.top[i].game.name) // json.top[0] object
