@@ -14,7 +14,9 @@ request(
     try {
       json = JSON.parse(body) // object （json格式）
     } catch (error) {
-      console.log('error!!! 伺服器有回應，但是 API 文件內的資料不符合 JSON 格式')
+      console.log('error!!! 伺服器有回應，出現 error 可能的原因為：')
+      console.log('  (1) 網址有效，但API 文件內的資料可能不符合 JSON 格式，無法做資料轉換')
+      console.log('  (2) 網址有效，但無法使用 API 文件內的資料，可能是沒有權限訪問該頁面或瀏覽器本版錯誤等問題')
       return
     }
     for (let i = 0; i < 10; i++) {
