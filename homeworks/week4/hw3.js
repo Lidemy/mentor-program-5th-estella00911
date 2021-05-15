@@ -17,10 +17,10 @@ request.get(
       console.log(`請求錯誤，狀態碼：${response.statusCode}`)
       return
     }
-
+    let json = {}
     // 3rd step:看有沒有成功把 API 的資料從「json 字串」轉成「js 的object」 
     try {
-      const json = JSON.parse(body) // JSON 格式的字串 改成 "js的object"
+      json = JSON.parse(body) // JSON 格式的字串 改成 "js的object"
     } catch (error) {
       console.log('ERROR!!!', error)
     }
