@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset='utf-8'>
+
+  <title>報名表單</title>
+  <meta name='description' content='The HTML5 Herald'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='style.css'></link>
+  <link rel='stylesheet' href='https://necolas.github.io/normalize.css/8.0.1/normalize.css'></link>
+
+</head>
+
+<body>
+	<div class='container'>
+	<div class='form'>
+	<div class='header'>
+		<h1 class='header__title'  >新拖延運動報名表單</h1>
+		<p class='header__info header__date'>
+		  活動日期：2020/12/10 ~ 2020/12/11
+		</p>
+		<p class='header__info header__location'>
+			活動地點：台北市大安區新生南路二段1號
+		</p>
+		<p class='header__required'>必填</p>
+	</div> <!-- end .header -->
+
+	<form>
+		<div class='form__body'>
+			<div class='form__question'>
+				<div class='form__title'>暱稱</div>
+				<input type='text' placeholder='您的回答' class='placeholder'></input>
+			</div> <!-- end .form__question -->
+			<div class='form__question'>
+				<div class='form__title'>電子郵件</div>
+				<input type='email' placeholder='您的電子郵件' class='placeholder'></input>
+			</div> <!-- end .form__question -->
+			<div class='form__question'>
+				<div class='form__title'>手機號碼</div>
+				<input type='text' placeholder='您的手機號碼' class='placeholder'></input>
+			</div> <!-- end .form__question -->
+			<div class='form__question'>
+				<div class='form__title'>報名類型</div>
+				<div class='form__btn-radio'>
+					<input type='radio' id='think' name='sport__type'></input>
+					<label for='think'>躺在床上用想像力實作</label>
+				</div> <!-- end .form__btn-radio -->
+				<div class='form__btn-radio cellphone'>
+					<input type='radio' id='cellphone'></input>
+					<label for='cellphone' name='sport__type'>趴在地上滑手機找現成的</label>
+				</div> <!-- end .form__btn-radio -->
+			</div> <!-- end .form__question -->
+		<div class='form__question'>
+			<div class='form__title'>怎麼知道這個活動的？</div>
+			<input type='text' placeholder='您的回答' class='placeholder'></input>
+		</div> <!-- end .form__question -->
+		<div class='form__question'>
+			<div class='form__title'>其他</div>
+			<div class='form__subtitle'>對活動的一些建議</div>
+			<input type='text' placeholder='您的回答' class='placeholder'></input>
+		</div> <!-- end .form__question -->
+		<!-- submit -->
+		<input type='submit' value='提交' class='submit'></input>
+		<p class='submit__reminder'>請勿透過表單送出您的密碼。</p>
+	</div> <!-- end .form__body -->
+	</form> <!--end form-->
+</div> <!-- end .form -->
+</div> <!-- end container -->
+<!-- footer -->
+<footer>
+	<div class='footer__bottom'>
+		© 2020 © Copyright. All rights Reserved.
+	</div> <!-- end .footer__bottom -->
+</footer>
+</body>
+
+</html>
