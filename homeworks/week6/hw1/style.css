@@ -9,6 +9,7 @@
 	height: 84px;
 	background: white;
 	padding: 0 20px;
+	text-align: center;
 }
 /*OK*/
 .wrapper {
@@ -272,8 +273,9 @@ footer {
 	.navbar .wrapper {
 		height: 120px;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: space-between;
 		padding: 0px;
+
 	}
 	.banner {
 		    background: url(./2.jpg) left/cover no-repeat
