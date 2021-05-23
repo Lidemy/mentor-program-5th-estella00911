@@ -22,11 +22,14 @@
 - 使用類型：書、研究文獻、詩、歌、電影、歌劇、展覽、網頁、部落格文章的評論、Facebook 貼文，等等。
 - 可搭配的 html 標籤：`<blockquote>`、`<q>` 之中內容的引用來源就是使用 `cite` attribute。
 - <cite>[cite MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/cite) </cite>
+
+
 ## 請問什麼是盒模型（box modal）
+[Box Model 與 Display Property](https://www.coderbridge.com/series/11df29fa4c294d8fbb207a3455e5ad77/posts/007fedeef78a49ffad71a91669bef21e)
 
 
 ## 請問 display: inline, block 跟 inline-block 的差別是什麼？什麼時機點會用到？
-
+[Box Model 與 Display Property](https://www.coderbridge.com/series/11df29fa4c294d8fbb207a3455e5ad77/posts/007fedeef78a49ffad71a91669bef21e)
 
 
 
