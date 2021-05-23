@@ -25,11 +25,162 @@
 
 
 ## 請問什麼是盒模型（box modal）
-[Box Model 與 Display Property](https://www.coderbridge.com/series/11df29fa4c294d8fbb207a3455e5ad77/posts/007fedeef78a49ffad71a91669bef21e)
+
+![box model](https://static.coderbridge.com/img/estella00911/da44a3d0bbad420db4711a39ca39594e.png)
+在這邊稱此圖為「元素」。
+
+-----
+
+### 一、盒模型組成：
+1. content: 元素裡的內容，有可能是文字或圖。
+1. padding: 在 border 之內，content 之外的透明區域（spacing inside the border）。
+1. border: 邊框，包覆 padding 和 content。
+1. margin: 在 border 之外的透明區域（spacing outside the border）。
+1. 方便方別調整四個邊的樣式，還有區分 top、right、bottom、left，依照名稱長短有兩種屬性（property），以 border 舉例：
+
+**(1) individual property**
+- a. border-left
+- b. border-right
+- c. border-top
+- d. border-bottom
+- e. 舉例： `border-bottom: 5px;`，即為 border 的下邊為 5px 的粗細。
+
+**(2) shorthand property**
+- a. border: Apply to all four sides
+`border: 10px;`
+
+- b. border: Vertical | horizontal
+`border: 5px 10px;`
+
+- c. border: Top | Horizontal | Botton
+`border: 1px 2px 3px;`
+
+- d. border: Top | Right | Bottom | Left
+`border: 5px 1px 0 2px;`
+
+-----
+
+### 二、border
+
+##### 1. 簡介 border style
+- `border-width`: 控制 border 粗細。
+- `boder-color`: 調整 border 顏色。
+- `border-style`: 調整 border 類型，如`dashed`（虛線）、`solid`（實線）。
+- `border-radius: 20% or 5px`: 調整 border 四個邊角的弧度，舉例可以使用的單位有：`%` 及 `px`。
+- `box-sizing: border-box;`
+
+##### 2. 實際應用：
+
+表示方法有好幾種：
+
+- 表示方法：`border - <side> - <style>`
+    - `<side>`: top, bottom, left, right
+    - `<style>`: color, width, color, style
+    - 舉例：
+        - `border-top-color: yellow`
+        - `border-left-width: 3px`
+        - `border-right-style: dotted`
+
+
+- 常用的表示方法：
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="box_model_sample_1" src="https://codepen.io/estella00911/embed/MWppqmz?height=265&theme-id=dark&default-tab=css,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/estella00911/pen/MWppqmz'>box_model_sample_1</a> by PinChun
+  (<a href='https://codepen.io/estella00911'>@estella00911</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+-----
+
+### 三、padding
+
+##### 1. 簡介 padding
+在 border 之內增加透明的區域，所以在 content 與 border 之間有一個間隙。
+
+##### 2. 實際應用
+**Shorthand Property**
+1. pading: Apply to all four sides:
+`pading: 10px`
+
+2. pading: Vertical | horizontal:
+`padding: 5px 10px;`
+
+3. pading:Top | Horizontal | Botton
+`padding: 1px 2px 3px;`
+
+4. pading: Top | Right | Bottom | Left
+`Padding: 5px 1px 0 2px;`
+
+-----
+
+### 四、margin
+元素邊界外面與其他元素的邊界外的區域。
+
+-----
 
 
 ## 請問 display: inline, block 跟 inline-block 的差別是什麼？什麼時機點會用到？
-[Box Model 與 Display Property](https://www.coderbridge.com/series/11df29fa4c294d8fbb207a3455e5ad77/posts/007fedeef78a49ffad71a91669bef21e)
+### 五、Display Property（屬性模式）
+在講屬性模式之前，要先講一下在 html 裡各標籤（tag）會根據不同的元素的形式，在網頁裡呈現不同的預設模式（default display value）。
+先舉例介紹一下在 html 裡，不同的標籤都有其預設的 display property。可以分成`inline-level element` 及 `block-level element`：
+<iframe height="265" style="width: 100%;" scrolling="no" title="inline &amp; block element" src="https://codepen.io/estella00911/embed/QWppVxV?height=265&theme-id=dark&default-tab=html,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/estella00911/pen/QWppVxV'>inline &amp; block element</a> by PinChun
+  (<a href='https://codepen.io/estella00911'>@estella00911</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+以 `<span>` 及 `<div>` 為例子，可以發現被 `<span>` 包住的「成功登入」，仍與內文在同一行（row），沒有換行，可以知道：在 html 裡 `span` 是屬於 inline-level element；被 `<div>` 包住的「成功登入」自己佔一行，得知在 html 內， `div` 屬於 block-level element。若要更詳細得知 html 的標籤各是什麼元素。
+
+現在知道 html 標籤都會有一個預設的顯示模式（default display property），既然是預設的顯示樣式，那就可以更改，那要怎麼更改呢？
+我們可以透過在 CSS 的 display 將元素賦予新的 display property，來改變原本預設的顯示模式，如此一來，就可以將版面改成我們想要呈現的方式，是放在同一行呢？或者是直放放在一欄。
+
+以下是可以修改預設 display property 的舉例：
+1.  `display: inline;`
+1.  `display: block;`
+1.  `display: inline-block;` （可以呈現inline，同時保有區塊的特性）
+
+-----
+
+1. `display:Inline;`
+在 inline 的文字或圖片都不換行，放在同一行。inline 特性就是高、寬度、padding、margin 都不能改變，也就是說：放在同一行的文字或圖片就是本身的寬度。
+
+使用時機：當元素呈現 block 的排列，又想要把他改成同一行的排列時，就需要使用到 inline。
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="display: inline" src="https://codepen.io/estella00911/embed/MWppZOL?height=265&theme-id=dark&default-tab=html,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/estella00911/pen/MWppZOL'>display: inline</a> by PinChun
+  (<a href='https://codepen.io/estella00911'>@estella00911</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+-----
+
+2. `display:block;`
+元素會以區塊的方式呈現，而且預設的寬度是 100%，如果沒有特別設定，寬度會佔滿視窗。區塊的特性就是可以自行設定寬度、高度、padding、margin。
+
+使用時機：因為 `<img>` 預設顯示模式為 inline，但在刻靜態網頁的時候，除了考慮電腦版，也要考慮手機版，在電腦版中，圖片可以維持原預設的 inline 模式，但是在手機版，因為畫面變為狹長，圖片無法並排而列，就要改成 block，此時就需要 `display: block`，將圖片直直列下來，方便手機觀看。
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="img: inline -&gt; block" src="https://codepen.io/estella00911/embed/qBrrJxP?height=265&theme-id=dark&default-tab=html,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/estella00911/pen/qBrrJxP'>img: inline -&gt; block</a> by PinChun
+  (<a href='https://codepen.io/estella00911'>@estella00911</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+-----
+
+3. `display:inline-block;`
+將同一層的元素保持在同一行（inline），但這些元素可以設置各自的寬度、高度。換句話說，顯示方式很像 inline-element，但是保有自己的寬度（width）、高度（height）、margin、padding。
+
+使用時機：當在切版時，會使用 `div` 將網頁切成各個區塊，如 navbar、footer等，但是 `div` 的預設為 block，但是我們一般在電腦版網頁上的 navbar 都是一行（row）列出來，如：加入購物車、會員訊息、優惠券查詢，此時就會希望把 `div` 預設的 disply property —— block，改為 inline-block，同時又保有 block 可以更改。
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="display: inline-block" src="https://codepen.io/estella00911/embed/vYxxVyd?height=265&theme-id=dark&default-tab=html,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/estella00911/pen/vYxxVyd'>display: inline-block</a> by PinChun
+  (<a href='https://codepen.io/estella00911'>@estella00911</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+-----
+
+##### 比較
+| Display Property | 元素尺寸設定 | 呈現形式 |
+| --- | --- | --- |
+| inline | 保有原本寬高，不可更改。 | 同一行（row） |
+| block | 可更改寬高、padding、margin | 預設寬度為 100% 視窗，以區塊的方式呈現 |
+| Inline-block | 可更改寬高、padding、margin| 在同一行內，仍保有區塊的形式呈現|
 
 
 
