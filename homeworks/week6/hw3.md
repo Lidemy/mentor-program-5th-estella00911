@@ -45,14 +45,14 @@
 (2) 將元素自己本身設為基準點，想要偏移，或者是重疊圖層的效果，又要保留原本在排版流的空間。
 
 * `position: absolute;`
-參考 [這個網頁](https://medium.com/ui-ux%E7%B7%B4%E5%8A%9F%E5%9D%8A/position-%E5%B1%AC%E6%80%A7%E7%9A%84%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5-5931254e5203) 的譬喻，將這個設定 `position: absolute` 譬喻成便條紙，可以四處黏貼很方便，但是在 CSS 裡面，需要有個參考的基準點，才可以隨處黏貼，而這個參考基準點就是上層元素（如： parent layer 或 grandparent layer）中有設定 `position: relative` 的元素，若沒有上層元素設成 relative 的話，就是以整個視窗（body 元素）為基準點。瞭解基準點在哪裡後，就可以使用在 CSS 中使用 `top`、`left`、`bottom`、`right` 做偏移（將便條紙黏貼至不同地方）。
+參考 [這個網頁](https://medium.com/ui-ux%E7%B7%B4%E5%8A%9F%E5%9D%8A/position-%E5%B1%AC%E6%80%A7%E7%9A%84%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5-5931254e5203) 的譬喻，將這個設定 `position: absolute` 譬喻成便條紙，可以四處黏貼很方便，但是在 CSS 裡面，需要有個參考的基準點，才可以隨處黏貼，而這個參考基準點就是~~上層元素~~（看自我檢討後，修正為：**absolute 的定位點是往上找第一個 position 不是 static 的元素**）中有設定 `position: relative` 的元素，若沒有上層元素設成 relative 的話，就是以整個視窗（body 元素）為基準點。瞭解基準點在哪裡後，就可以使用在 CSS 中使用 `top`、`left`、`bottom`、`right` 做偏移（將便條紙黏貼至不同地方）。
 補充：`top`、`left`、`bottom`、`right`的指令，只有在 position 不是預設 static 時才可以使用。同樣地，在做圖層的重疊時會需要使用到 `z-index`（值越大，越上層），這也是在 position 不是預設 static 時才可以使用。
 
 使用時機：
 與 relative 搭配，這樣 設定 absolute 的元素就可以位移，有時候可以用在 CSS 製作幾何圖形或繪圖。
 
 * `position: fixed;`
-這個設定與`position: absolute` 一樣跳脫了排版流，不一樣的是：在 absolute 裡基準點為上一層元素或視窗本身；而 fixed 的基準點為整個視窗（body 元素）。因為是將基準點設在整個視窗上，意即在視窗頁面上不動，但是當頁面捲動時，因基準點為整個視窗，因此，也會定點於視窗的位置，不隨著頁面滑動。
+這個設定與`position: absolute` 一樣跳脫了排版流，不一樣的是：在 absolute 裡基準點<u>為上一層元素或視窗本身</u>（觀看自我檢討後，修正成：**absolute 的定位點是往上找第一個 position 不是 static 的元素**）；而 fixed 的基準點為整個視窗（body 元素）。因為是將基準點設在整個視窗上，意即在視窗頁面上不動，但是當頁面捲動時，因基準點為整個視窗，因此，也會定點於視窗的位置，不隨著頁面滑動。
 
 使用時機：像瀏覽網頁看到的廣告，不會隨著頁面滾動而移動，會固定在視窗的某一處上。
 
