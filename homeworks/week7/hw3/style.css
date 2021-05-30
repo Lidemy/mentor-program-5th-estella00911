@@ -1,0 +1,51 @@
+.body ,p{
+	margin:0;
+	padding:0;
+}
+.container {
+	margin: 10px auto;
+	width: 400px;
+	border: 1px solid green;
+	padding: 20px;
+}
+
+.section__title {
+	text-align: center;
+}
+
+.section__content {
+	text-align: center;
+	padding: 10px 0;
+}
+
+.section__todo-input {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px
+}
+
+/*.line-through {
+	text-decoration: line-through;
+}*/
+
+div.todo__list {
+	padding: 10px 0;
+	justify-content: space-between;
+	display: flex;
+}
+
+.input__box {
+	width: 270px;
+}
+
+input.btn-checkbox {
+	margin-right: 10px;
+}
+
+input:checked +span { /*:checked 不能加空格*/
+    text-decoration: line-through red 2px;
+    color: grey;
+}
+/*div>
+<label class='line-through'><input type='checkbox' class='btn-checkbox' name='btn-name'>
+</input><span>待辦事項！</span></label></div>*/
