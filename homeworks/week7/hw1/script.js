@@ -73,7 +73,7 @@ document.querySelector('.form__body').addEventListener('submit', (e) => {
   }
 
   // 判斷式：如果必填都有填寫資料的話，表單就會成功送出，並使用 alert 彈窗出填寫結果。
-  if (iteration === 0 && btnChecked !== [false, false]) {
+  if (iteration === 0 && ((btnChecked[0] === false && btnChecked[1] === true) || (btnChecked[0] === true && btnChecked[1] === false))) {
     alert(`
       暱稱：${texts[0].value}
       電子郵件：${texts[1].value}
