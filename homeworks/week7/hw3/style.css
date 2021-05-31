@@ -4,7 +4,7 @@
 }
 .container {
 	margin: 10px auto;
-	width: 400px;
+	width: 50%;
 	border: 1px solid green;
 	padding: 20px;
 }
@@ -46,6 +46,12 @@ input:checked +span { /*:checked 不能加空格*/
     text-decoration: line-through red 2px;
     color: grey;
 }
-/*div>
-<label class='line-through'><input type='checkbox' class='btn-checkbox' name='btn-name'>
-</input><span>待辦事項！</span></label></div>*/
+
+/*手機版 768 px 以下*/
+@media (max-width: 768px) {
+	.container {
+		width: 95%;
+		padding: 5px;
+		border: 0;
+	}
+}
