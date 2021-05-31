@@ -4,31 +4,29 @@
 <head>
   <meta charset='utf-8'>
 
-  <title>FAQ - 常見問題</title>
+  <title>FAQ 常見問題</title>
   <meta name='description' content='The HTML5 Herald'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel='stylesheet' href='style.css'></link>
   <link rel='stylesheet' href='https://necolas.github.io/normalize.css/8.0.1/normalize.css'></link>
+
 </head>
 
 <body>
-	<!--navbar-->
-	<nav>
+	<!-- navbar -->
+	<nav class='navbar'>
 		<div class='wrapper'>
-		<div class='navbar'>	
-				<div class='navbar__site-name'>
-					Just A Bite!</div> <!-- .navbar__site-name -->
-					<ul class='navbar__list'>
-							<li><a href='#' class='active'>抽個大獎</a></li>
-							<li><a href='#'>我要點餐</a></li>
-							<li><a href='#'>查詢訂單</a></li>
-							<li><a href='#'>常見問題</a></li>
-					</ul>  
-			</div> <!-- .wrapper -->
-		</div> <!-- .navbar -->
-	</nav> <!-- nav -->
-	<!--end: navbar-->
-  <!--  ------------------  -->
+			<div class='navbar__site-name'>
+				Just A Bite!
+			</div>
+			<ul class='navbar__list'>
+				<li><a href='#'>抽個大獎</a></li>
+				<li><a href='#'>我要點餐</a></li>
+				<li><a href='#'>查詢訂單</a></li>
+				<li class='active'><a href='#'>常見問題</a></li>
+			</ul>
+		</div>
+	</nav>
 	<!--start: FAQ-->
 	<section class='section'>
 		<div class='wrapper'>
@@ -37,7 +35,7 @@
 		<div class='section__content'>
 			<div class='section__FAQ'> 
 				<!--Q1-->
-				<div class='section__Q-And-A'>
+				<div class='section__Q-And-A QA__ans-ul'>
 					<div class='section__question'>
 						<div class='section__ques-list'>Q1:</div> <!-- .section__ques-list-->
 						<div class='section__ques-desc'>如何辦理退貨？</div> <!-- .section__ques-desc-->
@@ -59,7 +57,7 @@
 					</div> <!-- .section__Answer-->
 				</div> <!-- .section__Q-And-A-->
 				<!--Q2-->
-				<div class='section__Q-And-A'>
+				<div class='section__Q-And-A QA__ans-text'>
 					<div class='section__question'>
 						<div class='section__ques-list'>Q2:</div> <!-- .section__ques-list-->
 						<div class='section__ques-desc'>目前提供哪些付款方式？</div> <!-- .section__ques-desc-->
@@ -69,7 +67,7 @@
 					</div> <!-- .section__Answer-->
 				</div> <!-- .section__Q-And-A-->
 				<!--Q3-->
-				<div class='section__Q-And-A'>
+				<div class='section__Q-And-A QA__ans-text'>
 					<div class='section__question'>
 						<div class='section__ques-list'>Q3:</div> <!-- .section__ques-list-->
 						<div class='section__ques-desc'>線上刷卡如何操作呢？</div> <!-- .section__ques-desc-->
@@ -79,7 +77,7 @@
 					</div> <!-- .section__Answer-->
 				</div> <!-- .section__Q-And-A-->
 				<!--Q4-->
-				<div class='section__Q-And-A'>
+				<div class='section__Q-And-A QA__ans-text'>
 					<div class='section__question'>
 						<div class='section__ques-list'>Q4:</div> <!-- .section__ques-list-->
 						<div class='section__ques-desc'>如何查詢目前訂單的處理情況？</div> <!-- .section__ques-desc-->
@@ -89,7 +87,7 @@
 					</div> <!-- .section__Answer-->
 				</div> <!-- .section__Q-And-A-->
 				<!--Q5-->
-				<div class='section__Q-And-A'>
+				<div class='section__Q-And-A QA__ans-ul'>
 					<div class='section__question'>
 						<div class='section__ques-list'>Q5:</div> <!-- .section__ques-list-->
 						<div class='section__ques-desc'>訂單成立後，是否可以取消或是更改訂單數量及商品？</div> <!-- .section__ques-desc-->
@@ -103,7 +101,7 @@
 					</div> <!-- .section__Answer-->
 				</div> <!-- .section__Q-And-A-->
 				<!--Q6-->
-				<div class='section__Q-And-A'>
+				<div class='section__Q-And-A QA__ans-ul'>
 					<div class='section__question'>
 						<div class='section__ques-list'>Q6:</div> <!-- .section__ques-list-->
 						<div class='section__ques-desc'>我想購買的商品已經缺貨，什麼時候會進貨呢？</div> <!-- .section__ques-desc-->
@@ -123,22 +121,24 @@
 	<!--footer-->
 	<footer>
 		<div class='footer__top'>
-			<div class='footer__info'>
+			<div class='wrapper'>  <!-- 在這邊設定 wrapper，max-width 就不會散出去 -->
+				<!-- 內容分左右兩個區塊 -->
+				<div class='footer__info'>
 					<div>餐館地址: 天上地下天堂路三分之一里六段520號</div>
 					<div>訂位專線：02-1314-5566</div>
 					<div>營業時間：週一〜週五 09:00~18:00 / 週六、週日、國定假日（含連假）休息</div>
 					<div>email：service@justabite.com.tw</div>
 			</div>
 			<div>
-			<div class='footer__site'>Just A Bite!</div>
-			<div class='footer__social-media'>Facebook / Instagram / Youtube</div>
+				<div class='footer__site'>Just A Bite!</div>
+				<div class='footer__social-media'>Facebook / Instagram / Youtube</div>
 			</div>
+		</div>
 		</div>
 		<div class='footer__bottom'>
 			Copyright © 2020 Just A Bite All Rights Reserved. 咬一口股份有限公司版權所有
 		</div>
-	</footer>
-	<!--end: footer-->
-	<script src="script.js"></script>
+	</footer>	
+  <script src="script.js"></script>
 </body>
 </html>
