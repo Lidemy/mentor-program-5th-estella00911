@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset='utf-8'>
+
+  <title>To Do List</title>
+  <meta name='description' content='The HTML5 Herald'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='style.css'></link>
+  <link rel='stylesheet' href='https://necolas.github.io/normalize.css/8.0.1/normalize.css'></link>
+</head>
+
+<body>
+	<div class='container'>
+		<h1 class='section__title'>To Do List</h1>
+		<div class='section__todo-input'>
+			<div><label><input type='text' class='input__box' name='input-new'></input></label></div>
+			<div><button class='btn-add'>新增</button></div>
+		</div> <!-- section__todo-input -->
+		<div class='section__todo-lists'>
+		 	<div class='todo__list'>
+				<div><label class='line-through'><input type='checkbox' class='btn-checkbox' name='btn-name'></input><span>待辦事項！</span></label></div>
+				<div><button class='btn-delete'>刪除</button></div>
+			</div> 
+		
+		</div> <!-- .section__todo-lists -->
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>

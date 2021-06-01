@@ -1,0 +1,250 @@
+/*navbar*/
+.navbar {
+	box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+}
+/*OK*/
+.navbar .wrapper {
+	display: flex; /*1.左右並排*/
+	justify-content: space-between;  /*元素內：向兩側推開*/
+	align-items: center; /*在方塊內 row 置中*/
+	height: 84px;
+	background: white;
+	padding: 0 20px;
+}
+/*OK*/
+.wrapper {
+	max-width: 1920px;
+	margin: 0 auto; /*上下 0 左右 auto*/
+	/*padding: 0 12px;*/
+}
+
+/*OK*/
+.navbar__site-name {
+  color: #489846;
+  /*font-family: Quesstrial;*/
+  font-size: 36px;
+}
+/*OK*/
+.navbar__list {
+	list-style: none; /*2. 把討厭的 ul 符號關掉*/
+	margin: 0; /*3. 關掉討厭的瀏覽器預設：margin, padding*/
+	padding:0;
+	display: flex;  /*flex-direction: row 預設*/
+	font-size: 17px;
+}
+/*OK*/
+.navbar__list li {
+	margin-left: 12px;
+	border-radius: 8px;
+	transition: background 0.1s ease-in; /*漸變效果*/
+}
+/*OK*/
+.navbar__list li.active,
+.navbar__list li:hover {
+	background: #ff7286;
+}
+/*OK*/
+.navbar__list li.active a,
+.navbar__list li:hover a  {
+	color: white;
+}
+/*OK*/
+.navbar__list li a {
+	display: block;
+	text-decoration: none; /*預設為 underline 改為樣式無*/
+	color: black;
+	padding: 12px 24px;
+}
+
+
+/*section*/
+/*OK*/
+h2 {
+	margin: 0;
+}
+/*OK*/
+.section {
+	text-align: center;
+	margin-top: 80px;
+}
+/*OK*/
+.section__title {
+	display: inline-block;  /*why使用 讓他對齊？*/
+	font-size: 36px;
+	border-left: 15px solid #a3dea2;
+	margin-bottom: 36px;
+	padding-left: 16px;
+}
+/*OK*/
+.section__desc {
+	font-size: 16px;
+	line-height: 2em; /*這個fontsize 16的兩倍*/
+	margin: 0px 0px 68px 0px;
+}
+
+/*footer*/
+
+footer {
+	margin-top: 48px;
+}
+
+.footer__top {
+	background: #e8efee;
+	padding: 32px;  /*因為 wrapper 已經給 padding 12px*/
+	color: #484848;
+}
+
+.footer__top .wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer__info {
+	margin-right: 16px;
+}
+
+.footer__info div + div {  /*常用技巧，只有第二個開始的 div 才需要 margin-top*/
+	margin-top: 10px;
+}
+
+.footer__info div, .footer__social-media {
+	font-size: 14px;
+}
+
+.footer__site {
+	font-size: 36px;
+	color: #489846;
+}
+
+.footer__bottom {
+	background: #35564b;
+	color: white;
+	font-size: 16px;
+	padding: 12px;
+	text-align: center;
+}
+/*--------------------------*/
+/*自己試做 section FAQ*/
+.section__content {
+	width: 42%;
+	margin:0 auto;
+	margin-bottom: 41px;
+}
+
+.section__question {
+	display: flex;
+  align-items: center;
+  padding: 0;
+  padding-top: 29px;
+  padding-bottom: 24px;
+}
+
+.section__Q-And-A {
+  border-bottom: 1px solid #a6e2c0;
+  padding-bottom: 4px;
+}
+
+.section__ques-list {
+	color: #70b282;
+	font-size: 24px;
+	padding: 0 17px 0 17px;
+	width: 35px;
+}
+
+.section__ques-desc {
+	font-size: 18px;
+	/*position: relative;*/
+}
+
+.section__answer{
+	font-size: 16px;
+	letter-spacing: 0.14px;
+	/*position: absolute;*/
+	width: 90%;
+	padding-bottom: 41px;
+	padding-left: 68px;
+	text-align: left;
+	line-height: 27px;
+}
+
+.fold {
+	display: none;
+}
+
+/*end: 自己試做 section FAQ*/
+/*--------------------------*/
+
+
+/*RWD 好像沒有縮成兩排*/
+@media (max-width: 1280px) {
+	.section__content {
+		width: 75%;
+	}
+}
+
+/*手機版 768 px 以下*/
+@media (max-width: 768px) {
+	/*navbar*/
+	.navbar .wrapper {
+		height: 120px;
+		flex-direction: column;
+		justify-content: center;
+		padding: 0px;
+	}
+	.banner {
+		background: url(./2.jpg) left/cover no-repeat
+	}
+	/*OK*/
+	.navbar__site-name {
+		padding-top: 10px;
+	}
+	/*OK*/
+	.navbar__list {
+		display: flex;
+		width: 100%;
+		text-align: center;
+	}
+	/*OK*/
+	.navbar__list li {
+		flex: 1; /*不懂是啥*/
+		margin-left: 0; /*沒效果*/
+		border-radius: 0  /*沒效果*/
+		text-align: center;
+	}
+
+	/*FAQ*/
+	.section__ques-list {
+		padding: 0 8px 0 8px;
+	}
+	.section__question {
+	    align-items: baseline;
+	    text-align: left;
+	    width: 98%;
+	    margin: 0 auto;
+	}
+
+	.section__ques-desc {
+
+	}
+	.section__content {
+		width: 100%;
+		margin:0;
+	}
+	.QA__ans-ul .section__answer {
+		width: 95%;
+		padding: 0;
+	}
+
+	.QA__ans-text .section__answer {
+		padding-left: 20px;
+	}
+	/*footer*/
+	.footer__top .wrapper {
+		flex-direction: column-reverse;
+	}
+
+	.footer__info {
+		margin-right: 0;
+		margin-top: 16px;
+	}
+}
