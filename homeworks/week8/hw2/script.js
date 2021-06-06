@@ -1,6 +1,11 @@
 const topGameNumber = 5
 const streamsNumber = 20
-const requestNavBar = new XMLHttpRequest() // XMLHttpRequest()為瀏覽器提供的 class，使用 new 指令，可以新增一個實體的 XML
+
+const apiUrl = 'https://api.twitch.tv/kraken/'
+const acceptHeader = 'application/vnd.twitchtv.v5+json'
+const clientIdHeader = 'bmrryhslbf6vtr71xzyluf4ahb641o'
+
+const requestNavBar = new XMLHttpRequest()
 const requestStreams = new XMLHttpRequest()
 const requestTopFiveStreams = new XMLHttpRequest()
 
@@ -12,7 +17,7 @@ requestNavBar.addEventListener('load', () => {
     dynamicUpdateNavBar(topFiveGames)
     dynamicUpdateH2(topFiveGames)
 
-    // 2nd layer: 20 streamers of the most popular game
+    // 2nd layer: 20 streamers of the most popular game(default page)
     requestStreams.addEventListener('load', () => {
       if (requestStreams.status >= 200 && requestStreams.status < 400) {
         const jsonStreams = jsonForm(requestStreams)
@@ -24,11 +29,12 @@ requestNavBar.addEventListener('load', () => {
     requestStreams.onerror = () => {
       console.log('error')
     }
-    requestStreams.open('GET', `https://api.twitch.tv/kraken/streams?stream_type=live&game=${topFiveGames[0]}`, true)
-    requestStreams.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json')
-    requestStreams.setRequestHeader('Client-ID', 'bmrryhslbf6vtr71xzyluf4ahb641o')
+    requestStreams.open('GET', `${apiUrl}streams?stream_type=live&game=${topFiveGames[0]}`, true)
+    requestStreams.setRequestHeader('Accept', acceptHeader)
+    requestStreams.setRequestHeader('Client-ID', clientIdHeader)
     requestStreams.send()
     // end of 2nd layer
+
     // start 2nd layer: click other games in navbar, and show 20 liv streams of the corresponding game.
     document.querySelector('.navbar__list').addEventListener('click', (e) => {
       if (e.target.classList.contains('navbar__topFiveGames')) {
@@ -36,9 +42,9 @@ requestNavBar.addEventListener('load', () => {
         requestTopFiveStreams.addEventListener('load', () => {
           if (requestTopFiveStreams.status >= 200 && requestTopFiveStreams.status < 400) {
             const json = jsonForm(requestTopFiveStreams)
+            // removeChild: old 20 streams
             const node = document.querySelector('.section__top20-live-streams')
             const parentNode = document.querySelector('.section__content .wrapper')
-            // removeChild: old 20 streams
             parentNode.removeChild(node)
             // appendChild: new 20 streams
             const div = document.createElement('div')
@@ -53,9 +59,9 @@ requestNavBar.addEventListener('load', () => {
         requestTopFiveStreams.onerror = () => {
           console.log('error')
         }
-        requestTopFiveStreams.open('GET', `https://api.twitch.tv/kraken/streams?stream_type=live&game=${clickGameBtn}`, true)
-        requestTopFiveStreams.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json')
-        requestTopFiveStreams.setRequestHeader('Client-ID', 'bmrryhslbf6vtr71xzyluf4ahb641o')
+        requestTopFiveStreams.open('GET', `${apiUrl}streams?stream_type=live&game=${clickGameBtn}`, true)
+        requestTopFiveStreams.setRequestHeader('Accept', acceptHeader)
+        requestTopFiveStreams.setRequestHeader('Client-ID', clientIdHeader)
         requestTopFiveStreams.send()
         // end of 2nd layer
       }
@@ -67,12 +73,12 @@ requestNavBar.addEventListener('load', () => {
 requestNavBar.onerror = () => {
   console.log('error')
 }
-requestNavBar.open('GET', 'https://api.twitch.tv/kraken/games/top', true)
-requestNavBar.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json')
-requestNavBar.setRequestHeader('Client-ID', 'bmrryhslbf6vtr71xzyluf4ahb641o')
+requestNavBar.open('GET', `${apiUrl}games/top?limit=${topGameNumber}`, true)
+requestNavBar.setRequestHeader('Accept', acceptHeader)
+requestNavBar.setRequestHeader('Client-ID', clientIdHeader)
 requestNavBar.send()
 
-// functions
+// functions----------------------------------------------------------------------------------------
 
 // get API data, and change into json format
 function jsonForm(request) {
