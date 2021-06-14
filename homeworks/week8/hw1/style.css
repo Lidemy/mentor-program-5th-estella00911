@@ -1,0 +1,318 @@
+/*navbar*/
+.navbar {
+	box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+}
+/*OK*/
+.navbar .wrapper {
+	display: flex; /*1.左右並排*/
+	justify-content: space-between;  /*元素內：向兩側推開*/
+	align-items: center; /*在方塊內 row 置中*/
+	height: 84px;
+	background: white;
+	padding: 0 20px;
+}
+/*OK*/
+.wrapper {
+	max-width: 1920px;
+	margin: 0 auto; /*上下 0 左右 auto*/
+	/*padding: 0 12px;*/
+}
+
+/*OK*/
+.navbar__site-name {
+  color: #489846;
+  /*font-family: Quesstrial;*/
+  font-size: 36px;
+}
+/*OK*/
+.navbar__list {
+	list-style: none; /*2. 把討厭的 ul 符號關掉*/
+	margin: 0; /*3. 關掉討厭的瀏覽器預設：margin, padding*/
+	padding:0;
+	display: flex;  /*flex-direction: row 預設*/
+	font-size: 17px;
+}
+/*OK*/
+.navbar__list li {
+	margin-left: 12px;
+	border-radius: 8px;
+	transition: background 0.1s ease-in; /*漸變效果*/
+}
+/*OK*/
+.navbar__list li.active,
+.navbar__list li:hover {
+	background: #ff7286;
+}
+/*OK*/
+.navbar__list li.active a,
+.navbar__list li:hover a  {
+	color: white;
+}
+/*OK*/
+.navbar__list li a {
+	display: block;
+	text-decoration: none; /*預設為 underline 改為樣式無*/
+	color: black;
+	padding: 12px 24px;
+}
+
+
+/*section*/
+h2 {
+	margin: 0;
+}
+
+.section {
+	text-align: center;
+	margin-top: 80px;
+}
+
+.lottery__title {
+	font-size: 24px;
+	color: #5ec1b6;
+	font-weight: bold;
+	text-align: center;
+	margin: 30px 0 10px 0;	
+	position: relative;
+}
+
+/* lottery */
+/* [drawing]: diff codition*/
+.lottery__bg {
+	background: url(./games-bn.jpg) center/cover no-repeat;
+	height: 767px;
+	position: relative;
+}
+
+.FIRST__bg {
+	background: url(./bg-FIRST.jpg) center/cover no-repeat;
+	height: 767px;
+	position: relative;
+}
+.SECOND__bg {
+	background: url(./bg-SECOND.jpg) center/cover no-repeat;
+	height: 767px;
+	position: relative;
+}
+.THIRD__bg {
+	background: url(./bg-THIRD.jpg) center/cover no-repeat;
+	height: 767px;
+	position: relative;
+}
+
+.NONE__bg {
+	background: black;
+	height: 767px;
+	position: relative;
+}
+
+.FIRST__body, .SECOND__body, .THIRD__body, .NONE__body {
+	position: absolute;
+	border-radius: 16px;
+	width: 100%;
+	left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.FIRST__title, .SECOND__title, .THIRD__title, .NONE__title {
+	font-size: 36px;
+	color: white;
+	-webkit-text-stroke: 1.5px black; 
+	text-align: center;
+	margin: 0 0 55px;
+	font-family: MicrosoftJhengHei;
+}
+
+.lottery__btn-prize {
+	width: 10%;
+}
+
+
+
+/* end of diff codition */
+.lottery__body {
+	width: 500px;
+	height:560px;
+	position: absolute;
+	background: white;
+	border-radius: 16px;
+	left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+	
+.lottery__info {
+	padding: 0 22px 0 22px;
+}
+
+.lottery__row {
+	display: flex;
+	align-items: baseline;
+	width: 100%;
+	border-bottom: solid 1px #cdcdcd;
+}
+
+.lottery__header {
+	font-size: 18px;
+ 	font-weight: bold;
+ 	text-align: left;
+ 	color: #322929;
+ 	width: 20%;
+}
+
+.lottery__text {
+	font-size: 16px;
+	text-align: left;
+	color: #322929;
+	line-height: 1.63;
+	width: 70%;
+}
+
+.lottery__header, .lottery__text {
+	margin: 20px 0;
+	padding: 0 0 0 10px;
+}
+
+.lottery__btn {
+	text-decoration: none;
+	text-align: center;
+	border-radius: 8px;
+	height: 55px;
+	background: #e62a45;
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+	position: relative;
+	top: 5%;
+	left: 50%;
+  transform: translate(-50%);
+  border: none;
+	line-height: 55px;
+}
+
+.lottery__btn-drawing {
+	width: 80%;
+}
+
+/*footer*/
+
+.footer__top {
+	background: #e8efee;
+	padding: 32px;  /*因為 wrapper 已經給 padding 12px*/
+	color: #484848;
+}
+
+.footer__top .wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer__info {
+	margin-right: 16px;
+}
+
+.footer__info div + div {  /*常用技巧，只有第二個開始的 div 才需要 margin-top*/
+	margin-top: 10px;
+}
+
+.footer__info div, .footer__social-media {
+	font-size: 14px;
+}
+
+.footer__site {
+	font-size: 36px;
+	color: #489846;
+}
+
+.footer__bottom {
+	background: #35564b;
+	color: white;
+	font-size: 16px;
+	padding: 12px;
+	text-align: center;
+}
+
+
+/*RWD 好像沒有縮成兩排*/
+@media (max-width: 1280px) {
+	.section__content {
+		width: 75%;
+	}
+}
+
+/*手機版 768 px 以下*/
+@media (max-width: 768px) {
+	/*navbar*/
+	.navbar .wrapper {
+		height: 120px;
+		flex-direction: column;
+		justify-content: center;
+		padding: 0px;
+	}
+
+	.navbar__site-name {
+		padding-top: 10px;
+	}
+	/*OK*/
+	.navbar__list {
+		display: flex;
+		width: 100%;
+		text-align: center;
+	}
+	/*OK*/
+	.navbar__list li {
+		flex: 1; /*不懂是啥*/
+		margin-left: 0; /*沒效果*/
+		border-radius: 0  /*沒效果*/
+		/* text-align: center; */
+	}
+
+	/*lottery*/
+	.lottery__body {
+		width: 100%;
+		height: auto;
+    	padding-bottom: 20px;
+	}
+	.lottery__bg {
+		height: 750px;
+	}
+	
+	.FIRST_bg, .SECOND__bg, .THIRD__bg, .NONE__bg {
+		height: 400px;
+	}
+	.lottery__row {
+		padding: 0;
+		margin: 15px 0;
+		display: block;
+	}
+
+	.lottery__title {
+		margin: 20px 0;
+		padding: 0 10px;
+	}
+
+	.lottery__header, .lottery__text{
+		width: 90%;
+		padding: 0 10px;
+		margin: 20px 0;
+	}
+
+	.lottery__btn {
+		width: 40%;
+	}
+
+	.phone__style {
+    display: block;
+    margin: 10px 0 0 0;
+	}
+	/*footer*/
+	.footer__top .wrapper {
+		flex-direction: column-reverse;
+	}
+
+	.footer__info {
+		margin-right: 0;
+		margin-top: 16px;
+	}
+}
