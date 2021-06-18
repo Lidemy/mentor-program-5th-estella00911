@@ -635,6 +635,102 @@ num_rows: 2
 
 進一步需要在實際頁面做出反應的話，就需要連接實際頁面的 php 檔案與功能製作的 php，那要怎麼連接呢？在此練習的方法是以 `header` 頁面導向至自己實際頁面並附上 URL query string（藉此傳回在 `handle_register.php` 判斷得出的結果），然後可以再實際頁面的 register.php 寫判斷式，當發生「帳密輸錯」的狀況時，顯示「帳密輸入錯誤，請再輸入一次」諸如此類的提示訊息。
 
+<h2 id="loginAndRegister">怎麼記住登入狀態？Cookie 簡介與實作</h2>
 
+<h3 id="">Cookie 簡介</h3>
+
+**為什麼要使用 cookie 呢？**
+在登入後發出 request，登入成功，但是當我想要發布留言時，發出一個 request，此時瀏覽器不曉得在登入與發布留言發出 request 的人為同一個，所以就需要 Cookie 來解決這個問題。
+**符合 Cookie 條件：**
+當我們再次拜訪頁面的時候，瀏覽器會把 cookie 自動帶上，但是符合 cookie 的條件是什麼呢？
+1. 同一個 domain，因為有網頁安全性的問題。
+2. 沒有過期
+
+那要怎麼樣設定 cookie 跟帶上 cookie，才可以讓我們達到「登入」的效果呢？
+
+1. **設定 Cookie**：`setcookie( "<cookie name>", "<cookie value>", "<future_timestamp>")`
+(1) `<cookie name>`：cookie 名稱。
+(2) `<cookie value>`：cookie 值，例如：`CWLDMLWEL`。
+(3) `<future_timestamp>`：cookie 有效日期，例如：`time() + 3600 * 24 * 30` 的意思是現在時間加上 1 小時 * 24 小時 * 30 天，所以有效日期為 30 天。
+應用：
+1. **自動帶上 Cookie**：`$_COOKIE['<cookie name>']`
+在需要記住的 php 檔案頁面，加上 `$_COOKIE['<cookie name>']`
+
+瞭解怎麼樣設定 cookie 與帶上 cookie，就可以來實作看看。
+
+<h3 id="">Cookie 實作</h3>
+
+**製作步驟**
+1. handle.php （實際「看得見」的登入頁面）
+在登入的時候，設定 cookie：`setcookie('username', $username, time() + 3600);`
+1. index.php （留言板頁面）
+(1) `$_COOKIE['username']`自動帶上 cookie。
+---
+
+**思考細節**
+
+**思考 1：** 
+要怎麼設定 cookie？要怎麼取得 cookie？
+**想法：**
+後來才知道，先在登入時，設定 cookie：`setcookie('username', $username, time() + 3600);`，登入成功後，會帶上 cookie，並將頁面跳轉回留言本主頁，此時檢查留言版主頁的 dev tool 中 network 內index.php 的 request header，可以發現帶上 cookie。
+若要在 php 內取得 cookie 要使用 `$_COOKIE['username']` 的指令取得。
+
+---
+
+**思考 2：**
+怎麼利用 cookie 來記住登入，然後做出登入與登出頁面的區隔？
+
+**想法：**
+利用 PHP 的語法需要包覆在 `<?php ... ?>` 內才會執行 PHP，在此之外的語法，瀏覽器可以自行 render html 標籤的 code。所以就可以做成如下：
+
+如果尚未登入的話，就顯示按鈕登入與註冊，如果登入的話，就顯示登出按鈕，這樣就可以利用 cookie 來辨別有沒有登入。
+```php=
+// 登入與登出狀態：
+<?php if（尚未登入）{ ?>
+  <a href='login.php'>登入</a>
+  <a href='register.php'>註冊</a>
+<?php } else { ?> 
+  <a href='logout.php'>登出</a>
+```
+
+
+---
+
+**思考 3：**
+現在 cookie 帶的是 username，要怎麼在新增留言時，記得你是哪一個 username，然後顯示 nickname 呢？
+
+<u>@ hanle_add_comment.php</u>
+1. 帶上 cookie `$_COOKIE['username'];`，找到 username，這樣就知道你是誰了！
+2. 利用 username 在 jean_users **查詢** nickname：`$result = $conn->query(sprintf("SELECT nickname FROM jean_users where username ='%s'"), $username)`
+
+    > 備註：此時的 `$conn->query` 只是撈資料，若要進一步拿取資料在 PHP 使用，需要再加上 `fetch_assoc()`
+3. 拿取資料到 PHP 檔案上：`$row = $result->fetch_assoc();`
+4. 取得 nickname 的變數 `$nickname = $row['nickname'];`
+5. 後續照舊，從表單獲得參數 `$_POST['content];`，輸入至 jean_comments 資料表，完成「新增與發布留言」。
+
+---
+
+**思考 4：**
+做完登入與新增留言，那要怎麼登出呢？
+
+**想法：**
+登出在 PHP 裡面的意思就是清除 cookie，那要怎麼清除 cookie 呢？先前有提到 cookie 符合的條件就是一同一個 domain，二 cookie 沒有過期，所以在此讓 cookie 失效的方法就是讓 cookie 過期，並清除 cookie 的值，所以可以這樣寫 `setcookie('username', '', time() - 3600);` 設定 cookie 的名稱為 username，值設為 `""`，時間為現在時間點的前一個小時，就不就是過期啦？所以 cookie 就失效了。
+
+---
+
+
+**思考 5：**
+在留言版主頁的登入頁面與登出頁面的長相為？
+
+要先想過登入與登出的版型大概長什麼樣，才可以針對有沒有登入來做一些更動，如登入時，在導覽列顯示登出，在留言板中顯示留言框與留言送出按鈕，沒有登入時，於導覽列顯示登入與註冊，並在留言板上，不顯示留言框與留言送出按鈕。
+
+![](https://i.imgur.com/oPVfCkJ.png)
+
+---
+
+**思考 6：**
+在留言版主頁，登入可以進行留言，沒有登入則不能留言，所以要做出這個功能，那要怎麼在 index.php 製作呢？
+
+前面的思考 2 提過利用 PHP 語法的特性，寫判斷式來判斷哪些　html tag 會顯示，在這邊利用一樣的方法來判斷：留言板跟留言發布按鈕在登入時出現，在登出時消失。
 
 ---
