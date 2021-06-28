@@ -3,13 +3,23 @@
   require_once('conn.php');
   require_once('utils.php');
 
+
   $username = NULL;
   $user = NULL;
   if (!empty($_SESSION['username'])) {
     $username = $_SESSION['username'];
     $user = getUserFromUsername($username);
   }
-  
+
+
+  $page = NULL;
+    if (empty($_GET['page']) == 1) {
+    $page = 1;
+  } else {
+    $page = $_GET['page'];
+  }
+  $limit_per_page = 5;
+  $offset = ($page - 1) * $limit_per_page;
   $sql =
     'SELECT '.
       'C.id as id, '.
@@ -23,9 +33,10 @@
     'jean_users as U '.
     'ON C.username = U.username '.
     'WHERE is_deleted is NULL '.
-    'ORDER BY C.id DESC';
-
+    'ORDER BY C.id DESC '.
+    'limit ? offset ?';
   $stmt = $conn->prepare($sql);
+  $stmt->bind_param('ii', $limit_per_page, $offset);
   $result = $stmt->execute();
   if (!$result) {
     die('Error:' . $conn->error);
@@ -91,6 +102,8 @@
           $err = 'Err!!!';
           if ($code === '1') {
             $msg = 'the information you entered is incompleted.';
+          } else if ($code === '2') {
+            $msg = 'you are not allowed to leave a comment.';
           }
           echo '<h2 class="error">Error</h2>'; 
           echo '<h2 class="error">' . $msg . '</h2>';
@@ -100,10 +113,10 @@
       <?php } else { ?>
         <h2 class='bg-color'>Please login to leave comment</h2>
       <?php } ?> 
-      <div class='board__hr'></div>
     </form>
   </div>
     <section>
+      <div class='board__hr'></div>
       <div class='wrapper'>
         <?php 
           while($row = $result->fetch_assoc()) {
@@ -112,10 +125,12 @@
           <div class='card__avatar'></div>
           <div class='card__body'>
             <span class='card__author'><?php echo escape($row['nickname']); ?>(@ <?php echo escape($row['username']); ?>)</span>
-            <span class='card__time'><?php echo escape($row['created_at']); ?></span>
-            <?php if($row['username'] == $username) { ?>
+            <span class='card__time'><?php echo escape($row['created_at']);?></span>
+            <?php if($row['username'] == $username) { ?> 
+              <div>
               <a class='card__btn' href='update_comment.php?id=<?php echo escape($row['id'])?>'>Edit</a>
               <a class='card__btn' href='handle_delete_comment.php?id=<?php echo escape($row['id'])?>'>Delete</a>
+            </div>
             <?php } ?>
             <p class='card__content'><?php echo escape($row['content']); ?></p>
           </div>
@@ -123,6 +138,40 @@
       <?php } ?>
       </div>
     </section>
+      <div class='board__hr pagi__hr-style'></div>
+      <?php
+        $sql_page =
+          'SELECT ' .
+          'count(id) as count ' .
+          'FROM jean_comments '.
+          'WHERE is_deleted is NULL';
+        $stmt = $conn->prepare($sql_page);
+        $result = $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $total_comments = $row['count'];
+        $total_page = ceil($total_comments / $limit_per_page);
+      ?>
+      <section class='section__pagination'>
+        <div class='pagi__btns'>
+          <?php if($page != 1) { ?>
+          <a class='pagi__btn-leftArrow pagi__btn-first' href='index.php'>
+            <div class='pagi__img-leftArrow'></div><span>first</span>
+          </a>
+          <a class='pagi__btn-leftArrow' href='index.php?page=<?php echo $page-1; ?>'>
+            <div class='pagi__img-leftArrow'></div><span>previous</span>
+          </a>
+        <?php } ?>
+        <?php if ($page != $total_page) { ?>
+          <a class='pagi__btn-rightArrow' href='index.php?page=<?php echo $page+1; ?>'>
+            <div class='pagi__img-rightArrow'></div><span>next</span>
+          </a>
+          <a class='pagi__btn-rightArrow pagi__btn-last' href='index.php?page=<?php echo $total_page; ?>'>
+            <div class='pagi__img-rightArrow'></div><span>last</span>
+          </a>
+        <?php } ?>
+        </div>
+        <div class='pagi__info'>共有 <?php echo $total_comments; ?> 筆留言，頁數<?php echo ' ' . $page . ' / ' . $total_page; ?></div>
   </div>
   </main>
   <script>

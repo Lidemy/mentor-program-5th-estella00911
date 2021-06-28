@@ -3,21 +3,18 @@
 	require_once('utils.php');
 	session_start();
 
-	// $username = $_SESSION['username'];
+	$admin = NULL;
+	$admin_user = 'admin';
+
   	$id = $_GET['id'];
- //  	$content = $_POST['content'];
+  	$username = $_SESSION['username'];
+  	if ($username == $admin_user) {
+		$admin = $admin_user;
+	}
 
-
-	// if(
-	// 	empty($_POST['content'])
-	// ) {
-	// 	$str = 'Location: update_comment.php?errCode=1&id=' . $id;
-	// 	header($str);
-	// 	die();
-	// }
-	$sql = "UPDATE jean_comments SET is_deleted=1 where id=?";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i', $id);
+	$sql = "UPDATE jean_comments SET is_deleted=1 where id=? and username=?";
+	$stmt = $conn->prepare($sql);	
+	$stmt->bind_param('is', $id, $username);
 	$result = $stmt->execute();
 
 	if (!$result) {

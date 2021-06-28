@@ -4,8 +4,8 @@
 	session_start();
 
 	$username = $_SESSION['username'];
-  	$id = $_POST['id'];
-  	$content = $_POST['content'];
+	$id = $_POST['id'];
+	$content = $_POST['content'];
 
 
 	if(
@@ -16,9 +16,9 @@
 		die();
 	}
 
-	$sql = "UPDATE jean_comments SET content=? where id=?";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('si', $content, $id);
+	$sql = "UPDATE jean_comments SET content=? where id=? and username=?";
+	$stmt = $conn->prepare($sql);	
+	$stmt->bind_param('sis', $content, $id, $username);
 	$result = $stmt->execute();
 
 	if (!$result) {

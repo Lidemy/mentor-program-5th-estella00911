@@ -57,6 +57,9 @@ body {
   cursor: pointer;
 }
 
+.board__btn:hover, .board__submit-btn:hover {
+	text-decoration: underline;
+}
 .board__input-row {
 	margin: 20px auto;
 	display: block;
@@ -128,7 +131,7 @@ body {
 
 .board__hr {
 	height: 1px;
-  width: 100%;
+  width: 80%;
   margin: 30px auto;
   border: 1px solid #e8e8e8;
 }
@@ -183,12 +186,8 @@ body {
 	padding: 20px 0 20px 0;
 	margin: 0px auto;
 }
-/*
-.board__register-btn {
-	display: flex;
-    margin: 20px auto;
-}
-*/
+
+/*edit nickname*/
 
 .board__showEdit-btn , .board__edit-btn{
     color: #003366;
@@ -219,6 +218,127 @@ a.card__btn {
   text-decoration: none;
 }
 
+/*pagination*/
+
+.pagi__img-rightArrow {
+  background: url(./resources/right-arrow.svg) center/cover no-repeat;
+	width: 50px;
+	height: 50px;
+}
+
+.pagi__img-leftArrow {
+  background: url(./resources/right-arrow.svg) center/cover no-repeat;
+  transform: scaleX(-1);
+	width: 50px;
+	height: 50px;
+}
+
+.pagi__btn-leftArrow, .pagi__btn-rightArrow {
+	width: 160px;
+  display: flex;
+  align-items: center;
+  border: #003266 1px solid;
+  border-radius: 10px;
+  justify-content: flex-start;
+  cursor: pointer;
+  text-decoration: none;
+  color: #003266;
+}
+
+.pagi__btn-leftArrow {
+ 	position: absolute;
+  transform: translate(-100px);
+ }
+
+.pagi__btn-rightArrow {
+	flex-direction: row-reverse;
+	transform: translate(100px);
+	position: absolute;
+}
+
+.pagi__btn-first {
+	transform: translate(-300px);
+}
+
+.pagi__btn-last {
+	transform: translate(300px);
+
+}
+
+.section__pagination {
+	margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.pagi__btns {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 0 10px 0;
+  height: 52px;
+}
+
+.pagi__info {
+	text-align: center;
+	color: #003266;
+}
+
+.pagi__hr-style {
+	position: relative;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+/*admin user table*/
+table.tb__users {
+  width:100%;
+  border-collapse:collapse;
+}
+
+table.tb__users thead th {
+  padding:5px 0px;
+  color: #fff;
+  background-color: #003266;
+}
+
+table.tb__users tbody td {
+	padding: 8px 0px;
+  color: #003266;
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 1px solid #99ccff;
+}
+
+/*table.tb__users tfoot td {
+  padding:5px 0px;
+  text-align:center;
+  background-color:#d6d6a5;
+}*/
+
+.board.admin__board {
+  width: 80%	;
+}
+
+.board.admin__wrapper {
+	width: 90%;
+}
+
+.admin__btn {
+	text-decoration: none;
+  color: #003366;
+  background: #99CCFF;
+  padding: 5px 20px 5px 20px;
+  margin: 10px 20px 0 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin__btn-panel {
+	display: flex;
+}
 @media (max-width: 768px){
 	.board__navbar {
 		display: flex;

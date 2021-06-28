@@ -8,7 +8,7 @@
   if (!empty($_SESSION['username'])) {
     $username = $_SESSION['username'];
     $user = getUserFromUsername($username);
-  }
+  } 
   
   $id = $_GET['id'];
 

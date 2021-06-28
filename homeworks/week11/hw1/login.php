@@ -1,4 +1,4 @@
-Í<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -40,7 +40,7 @@
           if ($code === '1') {
             $msg = 'Sign in Not Completed';
           }
-          else if ($code === '3') {
+          else if ($code === '2') {
             $msg = 'Incorrect Password or Username';
           }
           echo '<h2 class="error">Error</h2>';
