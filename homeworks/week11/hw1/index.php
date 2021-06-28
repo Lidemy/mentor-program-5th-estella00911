@@ -3,6 +3,8 @@
   require_once('conn.php');
   require_once('utils.php');
 
+  $admin = NULL;
+  $admin_status = 'admin';
 
   $username = NULL;
   $user = NULL;
@@ -11,6 +13,19 @@
     $user = getUserFromUsername($username);
   }
 
+  if (isset($_SESSION['username']) == $admin_status) {
+    $stmt = $conn->prepare('SELECT * from jean_users where status = ?');
+    $stmt->bind_param('s', $admin_status);
+    $result = $stmt->execute();
+    $result = $stmt->get_result();
+    if (!$result) {
+      die('Error:' . $conn->error);
+    }
+    if ($result->num_rows == 1) {
+    $row = $result->fetch_assoc();
+    $admin = $row['status'];
+    }
+  }
 
   $page = NULL;
     if (empty($_GET['page']) == 1) {
@@ -67,6 +82,9 @@
       <a class='board__btn' href="login.php">Login</a>
       <?php } else { ?>
       <a class='board__btn' href="logout.php">Logout</a>
+      <?php if ($username == $admin) { ?>
+          <a class='board__btn' href="index_admin.php">Backstage Management</a>
+        <?php } ?>
       <?php } ?>
     </div>
   <div class='board'>
@@ -126,7 +144,8 @@
           <div class='card__body'>
             <span class='card__author'><?php echo escape($row['nickname']); ?>(@ <?php echo escape($row['username']); ?>)</span>
             <span class='card__time'><?php echo escape($row['created_at']);?></span>
-            <?php if($row['username'] == $username) { ?> 
+              <?php if($row['username'] == $username OR $admin) { ?> 
+              <!-- 若是 username 本人或管理員，就可以編輯刪除留言 -->
               <div>
               <a class='card__btn' href='update_comment.php?id=<?php echo escape($row['id'])?>'>Edit</a>
               <a class='card__btn' href='handle_delete_comment.php?id=<?php echo escape($row['id'])?>'>Delete</a>

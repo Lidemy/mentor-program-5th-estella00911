@@ -31,8 +31,10 @@
     if (password_verify($_POST['password'], $row['password'])) {
       $_SESSION['username'] = $username;
       header("Location: index.php");
+      die();
     }
   } else if ($result->num_rows == 0) {
   	header("Location: login.php?errCode=2");
+    die();
   }
 ?>
