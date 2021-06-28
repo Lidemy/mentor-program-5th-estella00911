@@ -98,11 +98,87 @@
 舉例可參考這篇：[The include_once and require_once Statements TutorialRepulbic](https://www.tutorialrepublic.com/php-tutorial/php-include-files.php)
 
 ## 請說明 SQL Injection 的攻擊原理以及防範方法
+### 攻擊原理：
+利用 SQL 的語法是字串拼接的方式，輸入一些惡意字串，試圖改變 SQL 的語法，來破壞跟攻擊資料庫的伺服器。
 
+#### 例如：
+竊取資料庫的帳號密碼、使用者資訊，使用者常常將不同網站設立相同的密碼，所以駭客可以將帳號密碼輸在其他網站，來竊取其他資訊。
+
+### 攻擊方法：
+以留言板為例，其中 $nickname 從 cookie 取， $content，則是客戶端輸入留言的地方。
+以下 code 為按下新增留言鈕後，使用 SQL 語法將留言內容新增至資料庫：
+```
+Insert into comments(nickname, content) values('aaa', 'I am aaa')
+```
+
+#### 攻擊 1：
+登入使用者（username）： aaa
+留言內容：`'), ('admin', 'hi`
+![](https://i.imgur.com/QlZkRKi.png)
+
+#### 攻擊 2：
+登入使用者（username）： aaa
+留言內容：`'), ('admin', (select password from jean_users limit 1))#`
+![](https://i.imgur.com/MdF2Sa8.png)
+
+#### 攻擊 3：
+登入使用者（username）： aaa
+留言內容：`'), ((select username from jean_users where id=25) , (select password from jean_users where id =25))#`
+![](https://i.imgur.com/ixHMRaR.png)
+
+### 防範方法：`prepared statement`
+```
+$sql = 'insert into comments(username, content) values('?', '?')';
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('ss', $username, $content);
+$result = $stmt->execute();
+$result = $stmt->get_result();
+$result->num_rows;
+$row = $result->fetch_assoc();
+```
+1. `$conn->prepare()`：
+為 SQL query 做準備，會回傳（return）一個字串（string），之後會對這個字串做進一步的使用。
+
+2. `$stmt->bind_param('ss', $username, $content);`：
+將 SQL query 的字串帶上參數，其中`'ss'` 為插入的變數型態，舉例：`i`為該變數的型態整數、`s`為變數型態字串、`d`為變數型態浮點數。剛好 `$username` 與 `$content` 都是字串，所有就是 `'ss'`。
+
+3. `$result = $stmt->execute();`：
+執行先前準備好的 `$conn->prepare();`以及有參數的話，也要 `$stmt->bind_param();`，然後就執行 query。
+
+4. `$result = $stmt->get_result();`
+如果是執行 SELECT 的 SQL query，就可以使用這個指令來產生資料庫 query 的結果。
+
+5. 如果執行的 SQL query 是 `UPDATE`、`DELETE` 或 `INSERT`，可以利用 `$stmt->affected_rows` 來確認有沒有更新、刪除、新增至 MySQL 資料庫內，另外也可以使用 `$stmt->num_rows` 來取得回傳幾行的結果
+
+6. `$row = $result->fetch_assoc();`
+取得 SQL query 相關聯的某行的一組資料。然後可以輸入欄位名稱，來獲取該行的欄位資料： `$row['欄位名稱']`
 
 ##  請說明 XSS 的攻擊原理以及防範方法
+前情提要：
+網頁有分成動態網頁跟靜態網頁，動態網頁就是利用 PHP 跟後台做連結取資料，靜態網頁就是 HTML 與 CSS 寫成的網頁那要怎麼把 PHP 跟 HTML 寫在同一個檔案呢？就是副檔名使用 PHP，當要執行 PHP 語法的過程，像是 apache 幫 php test.php 跑 php，然後 apache 幫 php 得到的 response 傳回去，而要執行 PHP 語法與資料庫後台連結的話，需使用 `<?php ?>` 包住，如果沒有被他包住的語法，在被瀏覽器解析 code（如 HTML 語法）然後被瀏覽器 render 出來。
+
+### 攻擊原理
+在客戶端可以輸入文字的地方，假如文字輸入了 JavaScript、HTML 的語法，就會被瀏覽器解析成 code，像是輸入 HTML 標籤，就會被解讀成 heading 1 的語法。
+![](https://i.imgur.com/3RRpr4w.png)
+範例二：在留言處輸入 Javascript 的語法 `alert()`，按送出後，就會跳出小窗。
+![](https://i.imgur.com/Z5FL6wV.png)
+![](https://i.imgur.com/oFdS2Oc.png)
+範例三：輸入：`<script>location.href="https://www.google.com"</script>` 後，每次進入留言板（或頁面重新整理），就會導入 google 搜尋頁面，雖然在留言板內容為空白沒有文字，但是其實他隱藏了 Javascript 的語法，會自動導入到 google 頁面。這樣很危險，因為駭客可以將其導入到釣魚網站，竊聽使用者輸入的資料，然後竊取。
+
+### 防範方法
+利用跳脫 escape 字元，瀏覽器會把留言內容解析成語法，要避免這個方法就是將內容裡的有可能會變成語法的符號，例如 `<`、`>`、`/`、`&`、`"`、`'` 這些符號，進行 HTML 特殊字元編碼的轉換，即使是輸入`<alert>`，在顯示留言時，也會轉成：`&lt;alert&gt;`，在瀏覽器上 render 出來的話，就仍是 `<alert>` 的字面上英文字母與符號，不會變成 HTML、Javascript 的語法，遭受駭客攻擊導到釣魚網站。
 
 ## 請說明 CSRF 的攻擊原理以及防範方法
+CSRF(Cross Site Request Forgery)：跨網站請求偽造攻擊，不需要使用 GET / POST request method，就可以發出請求，
+### 攻擊原理
+攻擊的駭客，透過網站上的一些漏洞，發出非該使用者的請求，或做一些惡意的攻擊（任意竄改他人留言或刪除他人留言）。
+
+今天製作留言板的刪除功能，在刪除的功能運作上，是點刪除時，帶在 URL string query 上該留言內容的編號（id）
+，如：`handle_delete_comment.php?id=xx`，然後在 handle_delete.php 上執行 SQL DELETE query 將該留言編號（id）的內容刪除，問題來了，如果我在 URL 上修改 string query，將 `handle_delete_comment.php?id=11`，就可以把其他編號的留言刪除（可能是其他人，也可能是自己的留言），這樣就繞過了「只能刪自己留言」的限制，同理如編輯留言，在點擊編輯按鈕時，使用URL query string 帶上 id 編號，然後再修改該編號的留言，並更新至 SQL 資料庫中，當然非留言本人，也可以利用修改 string query 來得到修改他人留言的目的。
+
+### 防範方法
+在進行 SQL query DELETE（舉例，如刪除留言） 或 UPDATE（編輯留言）時，原本只有在 id 編號多少的地方刪除留言，這樣一來，有惡意的攻擊者就可以利用 query string 來修改 id 編號，然後刪除他人留言。
+如果要防範的話，可以多加一層驗證，就是當使用者名稱跟 cookie 的使用者身份相符合，這樣就可以刪除自己的留言，同時也限制他人惡意刪除、編輯他人的留言。
 
 reference:
 Q1:
@@ -118,3 +194,8 @@ Q2:
 [Understanding Hash Tables and rainbow tables--stackoverflow](https://stackoverflow.com/questions/35117950/understanding-hash-tables-and-rainbow-tables)
 
 [PHP Include and Require Files--TutorialRepulbic](https://www.tutorialrepublic.com/php-tutorial/php-include-files.php)
+
+Q3:相關指令查詢 php.net 的說明
+ 
+Q4: 
+[Can I escape HTML special chars in JavaScript?](https://stackoverflow.com/questions/6234773/can-i-escape-html-special-chars-in-javascript)
