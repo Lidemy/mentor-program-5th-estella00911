@@ -13,7 +13,7 @@
     $user = getUserFromUsername($username);
   }
 
-  if (isset($_SESSION['username']) == $admin_status) {
+  if ($username == $admin_status) {
     $stmt = $conn->prepare('SELECT * from jean_users where status = ?');
     $stmt->bind_param('s', $admin_status);
     $result = $stmt->execute();
@@ -35,6 +35,7 @@
   }
   $limit_per_page = 5;
   $offset = ($page - 1) * $limit_per_page;
+
   $sql =
     'SELECT '.
       'C.id as id, '.

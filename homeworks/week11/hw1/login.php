@@ -19,9 +19,9 @@
     <a class='board__btn' href="register.php">Register</a>
     <a class='board__btn' href="index.php">Back to Board</a>
   </div>
-  <div class='board'>
+  <div class='board board__login-height'>
     <div class='wrapper'>
-    <form class='board__new-comment-form' method='POST' action='handle_login.php'>
+    <form class='board__new-comment-form board__login-css' method='POST' action='handle_login.php'>
       <h1 class='board__anchor'>Login</h1>
       <div class='board__input-area'>
         <div class='board__row board__register'>
@@ -39,9 +39,10 @@
           $err = 'Err!!!';
           if ($code === '1') {
             $msg = 'Sign in Not Completed';
-          }
-          else if ($code === '2') {
+          } else if ($code === '2') {
             $msg = 'Incorrect Password or Username';
+          } else if ($code === '3') {
+            $msg = 'Could not find your username';
           }
           echo '<h2 class="error">Error</h2>';
           echo '<h2 class="error">' . $msg . '</h2>';
