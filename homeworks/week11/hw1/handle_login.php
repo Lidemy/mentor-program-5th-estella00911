@@ -32,9 +32,12 @@
       $_SESSION['username'] = $username;
       header("Location: index.php");
       die();
+    } else {
+    	header("Location: login.php?errCode=2");
+      die();
     }
-  } else if ($result->num_rows == 0) {
-  	header("Location: login.php?errCode=2");
+  } else {
+    header("Location: login.php?errCode=3");
     die();
   }
 ?>

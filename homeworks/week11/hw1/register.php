@@ -19,9 +19,9 @@
     <a class='board__btn' href="login.php">Login</a>
     <a class='board__btn' href="index.php">Back to Board</a>
   </div>
-  <div class='board'>
+  <div class='board board__register-height'>
     <div class='wrapper'>
-    <form class='board__new-comment-form' method='POST' action='handle_register.php'>
+    <form class='board__new-comment-form board__login-css' method='POST' action='handle_register.php'>
       <h1 class='board__anchor'>Register</h1>
       <div class='board__input-area'>
         <div class='board__row board__register'>
