@@ -1,0 +1,56 @@
+// font setting: size、style、class
+// background-image
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+
+// 1. size
+$font-navbar: 'Abril Fatface', cursive;
+$font-title: 'Abril Fatface', cursive;
+$font-article-En-Num: 'Merriweather', serif;
+$font-article-content:'Noto Serif TC', serif;
+$font-article-title:  'Noto Sans', sans-serif;
+$font-banner-intro: 'Gochi Hand', cursive;
+
+$font__site-title: 72px;
+$font__site-intro: 32px;
+$font__navbar-text: 24px;
+$font__article-title: 24px;
+$font__article-main-text: 18px;
+$font__article-minor-text: 16px;
+$font__footer: 18px;
+
+$article__minor-text: #8a8888;
+$dividing-line:#f0f0f0;
+$btn-light-pink: #f9f1f0;
+$btn-medium-pink: #f8c1bb;
+$btn-dark-pink: #f79489;
+$transparent-white: #ffffffe3;
+
+.font {
+	&-Abril {
+		font-family: $font-title;
+	}
+
+	&-Merri {
+		font-family: $font-article-En-Num;
+	}
+
+	&-Serif-TC {
+		font-family: $font-article-content;
+	}
+
+	&-Noto-Sans{
+		font-family: $font-article-title;
+	}
+}
+
+
+//   1. file path
+$path-rel-socialMedia: './resources/icon_social-media/svg';
+$path-rel-function-icons: './resources/icons_func';
+$path-rel-bg:'./resources/bg';
