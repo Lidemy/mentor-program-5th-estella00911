@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>To Do List</title>
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src='https://code.jquery.com/jquery-3.6.0.js'></script>
+  <style>
+    .hide {
+      display: none !important;
+      /* 沒有想到篩選分類的方法 */
+    }
+
+    .form-check-edit {
+      height: 46.5px;
+      box-sizing: border-box;
+    }
+  </style>
+  <script>
+    // .prop('checked') true 有勾選
+    // .prop('checked') false 無勾選
+    function escape(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/\//g, "&#x2F;")
+    };
+    // HTML of todo list card 
+    const html =
+      `<li class="status-active todo list-group-item d-flex align-items-center justify-content-between">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="todo-{id}">
+          <label class="form-check-label" for="todo-{id}">{content}</label>
+        </div>
+        <input class="form-check-edit form-control hide" type="text" aria-label="default input example" name='form-check-input'>
+        <div class='d-flex align-items-center'>
+          <button type="button" class="btn-close btn-delete" aria-label="Close"></button>
+        </div>
+      </li>`
+
+    let id = 1;
+    let todo_count = 0;
+    let todo_notCompleted = 0;
+
+    $(document).ready(function () {
+      var searchParams = new URLSearchParams(window.location.search);
+      const todoId = searchParams.get('id');
+      if (todoId) {
+        $.getJSON('http://mentor-program.co/mtr04group2/jean/week12/hw2/get_todo.php?id=' + todoId, function (data) {
+          const todos = JSON.parse(data.data.todo)
+          restoreTodos(todos)
+        }
+        );
+      }
+
+      function restoreTodos(todos) {
+        if (todos.length === 0) return;
+        todo_notCompleted = 0;
+        todo_count = 0;
+        id = todos[todos.length - 1].id + 1;
+        for (let i = 0; i < todos.length; i++) {
+          const todo = todos[i];
+          $('.list-group').append(
+            html
+              .replace('{content}', escape(todo.content))
+              .replaceAll('{id}', todo.id)  // or .replace(/{id}/g, id) 其中 g 意味著Global，讓 replace 取代所有相符的字，而不僅是第一個符合的字。
+              .replace('status-active', todo.is_completed ? 'status-completed' : 'status-active')
+          )
+          todo_count += 1;
+          if (todo.is_completed) { // 完成
+            $('#todo-' + todo.id).prop("checked", true);
+            $('#todo-' + todo.id).siblings().css('text-decoration', 'line-through');
+            $('#todo-' + todo.id).siblings().css('color', 'grey');
+          } else {
+            todo_notCompleted += 1;
+          }
+        }
+        updateCounter();
+      }
+
+      function addTodo() {
+        let val = $('.todo-input').val();
+        if (!val) {
+          return;
+        } else {
+          $('.list-group').append(
+            html
+              .replace('{content}', escape(val))
+              .replaceAll('{id}', id)  // or .replace(/{id}/g, id) 其中 g 意味著Global，讓 replace 取代所有相符的字，而不僅是第一個符合的字。
+          );
+          $('.todo-input').val('');
+          id += 1;
+          todo_count += 1;
+          todo_notCompleted += 1;
+          updateCounter();
+        }
+      }
+      // 新增按鈕：新增待辦事項、計數
+      $('.btn-add').click(function () {
+        addTodo();
+      })
+
+      // 按 enter 新增待辦事項、計數
+      $('.todo-input').on("keydown", function (e) {
+        if (e.which == 13) {
+          addTodo();
+          e.preventDefault(); // 防止重新載入頁面
+        }
+      })
+
+      // 勾選完成/未完成的計數
+      $('.card').on('change', '.form-check-input', (e) => { // click 也可以
+        let isCompleted = $(e.target).prop('checked')
+        if (isCompleted) {
+          todo_notCompleted -= 1;
+          updateCounter();
+        } else {
+          todo_notCompleted += 1;
+          updateCounter();
+        }
+      })
+
+      // 刪除的計數
+      $('.list-group').on('click', '.btn-delete', function (e) {
+        let target = $(e.target).closest('.list-group-item');
+        let isCompleted = $(e.target).parent().siblings().children('.form-check-input').prop('checked');
+        // fadeOut 與 count 計數的順序，如果是 fadeOut 在前、count 在後=> correct；反之，會刪除每筆筆數，會變成 all -1, active -1。
+
+        if (isCompleted) { // 完成
+          todo_count -= 1;
+
+        } else { // 未完成
+          todo_notCompleted -= 1;
+          todo_count -= 1;
+        }
+        target.fadeOut(() => {
+          target.remove();
+        })
+        updateCounter();
+      })
+
+      // 勾選完成/未完成 CSS 樣式更改
+      $('.card').click(function (e) {
+        let todoText = $(e.target).siblings();
+        let todoItem = $(e.target).closest('.list-group-item');
+        if ($(e.target).prop('checked')) {
+          todoText.css('text-decoration', 'line-through');
+          todoText.css('color', 'grey');
+          todoItem.addClass('status-completed');
+          todoItem.removeClass('status-active');
+        } else {
+          todoText.css('color', 'black');
+          todoText.removeAttr('style');
+          todoItem.removeClass('status-completed');
+          todoItem.addClass('status-active');
+        }
+      })
+
+      // 更新計數的 function
+      function updateCounter() {
+        $('.notCompletedCount').text(todo_notCompleted)
+        // for filter count
+        let completed = todo_count - todo_notCompleted;
+        $('.count-filter-all').text(todo_count)
+        $('.count-filter-active').text(todo_notCompleted)
+        $('.count-filter-completed').text(completed)
+      }
+
+      // 刪除完成的待辦事項
+      $('.card').on('click', '.btn-clear-all-completed', function () {
+        $('.list-group-item.status-completed').each(function (i, el) { // el 為點到的 DOM
+          el.remove();
+          todo_count -= 1;
+        });
+        updateCounter()
+      })
+
+      // 刪除所有待辦事項
+      $('.card').on('click', '.btn-clear-all', function () {
+        $('.list-group-item.status-completed.todo').each(function (i, el) { // el 為點到的 DOM
+          todo_count -= 1;
+          el.remove();
+        });
+        $('.list-group-item.status-active.todo').each(function (i, el) { // el 為點到的 DOM
+          todo_count -= 1;
+          todo_notCompleted -= 1;
+          el.remove();
+        });
+        updateCounter()
+      })
+
+      // 嘗試使用huli 另設 attribute 來使用判斷式判斷
+      $('.btn-filters').on('click', 'button', function (e) {
+        let filterType = ($(e.target).attr('filter-data-value'));
+        let statusCompleted = $('.list-group-item.status-completed.todo');
+        let statusActive = $('.list-group-item.status-active.todo');
+        if (filterType == 'active') { // 未完成
+          statusCompleted.addClass('hide'); // 隱藏「完成」
+          if (statusActive.hasClass('hide')) { // 如果有
+            statusActive.removeClass('hide')
+          }
+        } else if (filterType == 'all') {
+          if (statusCompleted.hasClass('hide')) {
+            statusCompleted.removeClass('hide')
+          }
+          if (statusActive.hasClass('hide')) {
+            statusActive.removeClass('hide')
+          }
+        } else {
+          statusActive.addClass('hide')
+          if (statusCompleted.hasClass('hide')) {
+            statusCompleted.removeClass('hide')
+          }
+        }
+      })
+
+      // save 儲存待辦清單
+      $('.btn-save').click(function () {
+        let todos = [];
+        $('.todo.list-group-item').each((e, element) => {
+          let input = $(element).find('.form-check-input')
+          let label = $(element).find('.form-check-label')
+          todos.push({
+            id: input.attr('id').replace('todo-', ''),
+            content: label.text(),
+            is_completed: $(element).hasClass('status-completed')
+          })
+        })
+        const data = JSON.stringify(todos)
+        $.ajax({
+          type: 'POST',
+          url: 'http://mentor-program.co/mtr04group2/jean/week12/hw2/api_add_todo.php',
+          data: {
+            todo: data
+          },
+          success: function (res) {
+            const respId = res.id
+            window.location = 'index.html?id=' + respId
+          },
+          error: function () {
+            alert('Error! can not add content to api_add_todo')
+          }
+        })
+      })
+
+    })
+  </script>
+</head>
+
+<body class='todo'>
+  <div class="container col-6">
+    <h1 class="text-center">To Do List</h1>
+    <form class='form__add-todo'>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control todo-input" placeholder="new todo" aria-label="Recipient's username"
+          aria-describedby="button-addon2" name='content'>
+        <button class="btn btn-outline-primary btn-add" type="button" id="button-addon2">Add</button>
+      </div>
+    </form>
+    <div class='todo-main-content'>
+      <div class="btn-group d-flex align-items-center col-12 btn-filters" role="group"
+        aria-label="Basic mixed styles example">
+        <button type="button" class="btn btn-primary" filter-data-value="all">
+          All <span class="badge bg-dark count-filter-all">0</span>
+        </button>
+        <button type="button" class="btn btn-warning" filter-data-value="active">
+          Active <span class="badge bg-danger count-filter-active">0</span>
+        </button>
+        <button type="button" class="btn btn-success" filter-data-value="completed">
+          Completed <span class="badge bg-dark count-filter-completed">0</span>
+        </button>
+      </div>
+
+      <div class="card mb-3 mt-4">
+        <ul class="list-group list-group-flush todos">
+          <!-- desc -->
+        </ul>
+        <li class="list-group-item d-flex align-items-center justify-content-between">
+          <!-- <div class="todoCount"><span class='notCompletedCount'>0</span> left</div> -->
+          <div class="todoCount"><span class='notCompletedCount'>0</span> left</div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Clear
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item btn-clear-all" href="#">Clear All</a></li>
+              <li><a class="dropdown-item btn-clear-all-completed" href="#">Clear All Completed</a></li>
+            </ul>
+          </div>
+        </li>
+      </div>
+      <div class=''>
+      </div>
+      <button type="button" class="btn btn-outline-primary btn-save">Save</button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
