@@ -35,10 +35,14 @@ background: url(./resources/icon_social-media/svg/041-linkedin.svg) center/cover
 ###### 這個作業跟第九週留言板比較像，一樣都會有教學帶著你做，但是這個作業的難度比較高，所以這個作業你並不需要真的 100% 理解。大家只要稍微知道 webpack 有哪些基本設定以及目的即可。
 
 ## hw3：改寫第八週 Twitch 作業
-
 ###### 第八週有一個作業是串接 Twitch API，當時我們是用 XMLHttpRequest 這個 WebAPI 來做的。但是在新的標準中，有一個東西叫做 `fetch`，能夠用不同的語法發出 request 並且串接 API。
 
 ###### 而這個作業呢，就是要把第八週的那個 Twitch API 的作業從 XMLHttpRequest 改成用 fetch 來串接 API。
+
+將 JavaScript 取得 API 與 JavaScript 新增、刪除 HTML 內容都包成 function。
+在參考 week 13 的自我檢討後，發現寫的方法不太一樣，不知道在 `async & await` 的部分寫的對不對。
+
+
 
 ## hw4：簡答題
 

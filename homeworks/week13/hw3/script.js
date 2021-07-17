@@ -22,36 +22,46 @@ function getData(url) {
 async function getNavAndStreams() {
   // 首頁：從 API 抓取前五熱門遊戲名稱及 top 1
   // 並新增至 navbar 與 top 1 遊戲名稱(heading 2)
-  const navBarUrl = `https://api.twitch.tv/kraken/games/top?limit=${topGameNumber}`
-  const jsonData = await getData(navBarUrl) // GET API: 前五熱門的遊戲 data
-  const topFiveGames = await topGamesList(jsonData, topGameNumber) // array(length= 5):前五熱門遊戲名稱的
-  await dynamicUpdateNavBar(topFiveGames) // JS動態新增到 HTML：導覽列的前五熱門遊戲名稱
-  await dynamicUpdateH2(topFiveGames) // JS動態新增到 HTML：首頁最熱門遊戲的名稱(heading 2)
+  try {
+    const navBarUrl = `https://api.twitchssss.tv/kraken/games/top?limit=${topGameNumber}`
+    const jsonData = await getData(navBarUrl) // GET API: 前五熱門的遊戲 data
+    const topFiveGames = await topGamesList(jsonData, topGameNumber) // array(length= 5):前五熱門遊戲名稱的
+    await dynamicUpdateNavBar(topFiveGames) // JS動態新增到 HTML：導覽列的前五熱門遊戲名稱
+    await dynamicUpdateH2(topFiveGames) // JS動態新增到 HTML：首頁最熱門遊戲的名稱(heading 2)
 
-  // 首頁：20 個實況
-  const top1StreamsUrl = `${apiUrl}streams?stream_type=live&game=${topFiveGames[0]}` // 準備發 request 的 URL，目的為尋找該遊戲的前20實況台
-  const jsonStreams = await getData(top1StreamsUrl) // GET API 該遊戲的前 20 實況台資料
-  await updateLiveStreams(jsonStreams, streamsNumber) // JS動態新增到 HTML：前 20 實況台資料
-
+    // 首頁：20 個實況
+    const top1StreamsUrl = `${apiUrl}streams?stream_type=live&game=${topFiveGames[0]}` // 準備發 request 的 URL，目的為尋找該遊戲的前20實況台
+    const jsonStreams = await getData(top1StreamsUrl) // GET API 該遊戲的前 20 實況台資料
+    await updateLiveStreams(jsonStreams, streamsNumber) // JS動態新增到 HTML：前 20 實況台資料
+  } catch (err) {
+    console.log('error in the home page:\n', err)
+  }
   // 監聽 navbar，點擊 navbar 的遊戲名稱時，會顯示該遊戲的 20 個實況
   document.querySelector('.navbar__list').addEventListener('click', (e) => {
     if (e.target.classList.contains('navbar__topFiveGames')) {
       async function appendOtherStreams() {
+        // to get gameName that you clicked on the navbar
         const clickGameBtn = e.target.innerText
-        const popularStreamsUrl = `${apiUrl}streams?stream_type=live&game=${clickGameBtn}`
-        const jsonStreams = await getData(popularStreamsUrl)
-        // removeChild: old 20 streams
-        const node = document.querySelector('.section__top20-live-streams')
-        const parentNode = document.querySelector('.section__content .wrapper')
-        parentNode.removeChild(node)
-        // appendChild: new 20 streams
-        const div = document.createElement('div')
-        div.classList.add('section__top20-live-streams')
-        parentNode.appendChild(div)
-        await updateLiveStreams(jsonStreams, streamsNumber)
-        await dynamicUpdateH2(clickGameBtn)
+        // get the game API data that you clicked
+        try {
+          const popularStreamsUrl = `${apiUrl}streams?stream_type=live&game=${clickGameBtn}`
+          const jsonStreams = await getData(popularStreamsUrl)
+          // removeChild: old 20 streams
+          const node = document.querySelector('.secstion__top20-live-streams')
+          const parentNode = document.querySelector('.section__content .wrapper')
+          parentNode.removeChild(node)
+          // appendChild: new 20 streams
+          const div = document.createElement('div')
+          div.classList.add('section__top20-live-streams')
+          parentNode.appendChild(div)
+          // update 20 streams & heading 2
+          await updateLiveStreams(jsonStreams, streamsNumber)
+          await dynamicUpdateH2(clickGameBtn)
+        } catch (err) {
+          console.log('error to show new 20 streams when clicking game name on navbar:\n', err)
+        }
       }
-      appendOtherStreams()
+      appendOtherStreams() // execute aynsc function
     }
   })
 }
