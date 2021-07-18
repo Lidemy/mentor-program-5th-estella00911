@@ -23,7 +23,7 @@ async function getNavAndStreams() {
   // 首頁：從 API 抓取前五熱門遊戲名稱及 top 1
   // 並新增至 navbar 與 top 1 遊戲名稱(heading 2)
   try {
-    const navBarUrl = `https://api.twitchssss.tv/kraken/games/top?limit=${topGameNumber}`
+    const navBarUrl = `https://api.twitch.tv/kraken/games/top?limit=${topGameNumber}`
     const jsonData = await getData(navBarUrl) // GET API: 前五熱門的遊戲 data
     const topFiveGames = await topGamesList(jsonData, topGameNumber) // array(length= 5):前五熱門遊戲名稱的
     await dynamicUpdateNavBar(topFiveGames) // JS動態新增到 HTML：導覽列的前五熱門遊戲名稱
