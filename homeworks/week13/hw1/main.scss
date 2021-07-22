@@ -273,4 +273,10 @@ p {
 		@include image-size(45px, none);
 		cursor: pointer;  
 	}
+	&__error {
+		font-size: 16px;
+		text-align: center;
+		color: red;
+		margin: 5px;
+	}
 }

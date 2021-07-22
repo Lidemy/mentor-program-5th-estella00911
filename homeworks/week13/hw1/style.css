@@ -464,5 +464,11 @@ p ~ p {
   min-width: none;
   cursor: pointer;
 }
+.login__error {
+  font-size: 16px;
+  text-align: center;
+  color: red;
+  margin: 5px;
+}
 
 /*# sourceMappingURL=style.css.map */
