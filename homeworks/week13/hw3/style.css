@@ -1,0 +1,177 @@
+* {
+	margin: 0;
+  padding: 0;
+}
+.wrapper {
+	margin: 0 auto; /*上下 0 左右 auto*/
+	padding: 0 12px;
+}
+/*navbar*/
+.navbar .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+	/* height: 44px; */
+}
+
+.navbar__site-name {
+  font-size: 36px;
+}
+
+.navbar__list {
+  display: flex;
+  font-size: 14px;
+}
+
+.navbar__list li {
+	list-style: none;
+	padding: 15px;
+	font-size: 18px;
+}
+
+.navbar__list li:hover {
+	background: rgb(89, 89, 89);
+}
+
+.navbar__list li:hover a  {
+	color: white;
+}
+
+.navbar__list li a {
+	text-decoration: none;
+	color: black;
+	height: 44px;	
+}
+.href__style {
+	text-decoration: none;
+}
+/*section__content*/
+
+.section__content .wrapper {
+	padding: 20px 100px;
+}
+
+.section__content {
+	background: gray;
+	position: relative;
+}
+
+.section__subtitle {
+	color: white;
+	text-align: center;
+	padding: 15px 0 15px 0;
+}
+
+.section__top20-live-streams {
+	position: relative;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.section__game-name {
+	font-size: 30px;
+	padding: 0 0 15px;
+}
+
+.section__game-desc {
+	font-size: 18px;
+}
+.section__streamer {
+	margin: 10px;
+	display: inline-block;
+	width: 320px;
+	background-color: rgb(89, 89, 89);
+	padding: 0 0 5px 0;
+}
+
+.section__streamer:hover {
+	transform: scale(1.1);
+  transition: all 0.5s ease 0s;
+}
+
+.streaming__figure-board {
+	width: auto;
+}
+
+.streaming__profile {
+	display: flex;
+	padding: 5px 0 5px 0;
+	align-items: center;
+}
+
+.streaming__profile img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: none;
+	padding: 0 0 0 5px;
+}
+
+.streaming__info {
+	display: block;
+	padding-left: 10px;
+}
+.streamding__tv-name {
+	font-size: 16px;
+	width: 260px;
+	color: white;
+}
+
+.ellipsis {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow:hidden;
+}
+
+.streaming__ID {
+	font-size: 14px;
+	padding: 5px 0 0 0;
+	color: white;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+		padding: 0;
+		max-width: 768px;
+	}
+	.navbar .wrapper {
+		display: inline-block;
+		height: auto;
+		flex-wrap: wrap;
+    justify-content: center;
+		display: flex;
+	}
+
+	.navbar__site-name {
+		padding: 10px;
+    text-align: center;
+		padding: 10px 0 0 0;
+	}
+	.navbar {
+		width:100%
+	}
+	.navbar__list {
+		align-items: center;
+		display: inline-block;
+		width:100%
+	}
+	
+	.navbar__list li {
+		text-align: center;
+    line-height: 1.5em;
+    padding: 10px 5px;
+	}
+
+	.navbar__list li a {
+		text-align: center;
+	}
+
+	.section__content .wrapper {
+    padding: 0;
+		text-align: center;
+	}
+
+	.streaming__ID {
+    text-align: left;
+}
+}
