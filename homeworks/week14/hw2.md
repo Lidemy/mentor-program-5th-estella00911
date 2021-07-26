@@ -3,8 +3,50 @@
 
 ## 整體部署心得
 ### 部署過程
-因為這個防火牆的問題，前前後後因為不知道怎麼 debug，就前前後後重新架了 AWS EC2 server 七八次快十次了，因為我四處參考教學文章，最後弄的很複雜，東一塊西一塊的，最後部署成功是乖乖參考[這篇(https://github.com/Lidemy/mentor-program-2nd-yuchun33/issues/15)，沒有做其他額外的 ubuntu 設定。
+因為這個防火牆的問題，前前後後因為不知道怎麼 debug，就前前後後重新架了 AWS EC2 server 七八次快十次了，因為我四處參考教學文章，最後弄的很複雜，東一塊西一塊的，最後部署成功是乖乖參考 [這篇(https://github.com/Lidemy/mentor-program-2nd-yuchun33/issues/15)，然後防火牆的設定是參考[[教學] UFW 防火牆設定軟體操作指南](https://xenby.com/b/258-%E6%95%99%E5%AD%B8-ufw-%E9%98%B2%E7%81%AB%E7%89%86%E8%A8%AD%E5%AE%9A%E8%BB%9F%E9%AB%94%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97)，開啟防火牆，允許 ssh port 22 連線，不給其他 port 連線到主機，允許主機可以連到外面的網路。
+```bash
+$ sudo ufw status verbose # 檢查防火牆有無開啟
+> Status: inactive # 防火牆：關閉
+$ sudo ufw allow 22 # 允許 port 22 可以連線 SSH，意即自己本地端可以連線到 ubuntu 主機。
+$ sudo ufw default deny incoming # 不給其他 port 連線到主機
+$ sudo ufw default allow outgoing # 允許主機可以連到外面的網路
+$ sudo ufw enable # 啟動 ufw
+$ sudo ufw status verbose # 檢查 ufw 狀態
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
 
+To                         Action      From
+--                         ------      ----
+22                         ALLOW IN    Anywhere
+22 (v6)                    ALLOW IN    Anywhere (v6)
+```
+這樣開啟防火牆，然後允許 port 22 可以連線 SSH 至主機，我發現輸入 `xxx.xxx.xx.x` 的 IPv4 位址後，連不進去網頁了！
+此時，就要再另外一個設定：
+```bash
+$ sudo ufw allow 80 # port 80 為 HTTP
+$ sudo ufw allow 443 # port 443 為 HTTP
+$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+$ sudo ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22                         ALLOW IN    Anywhere
+80                         ALLOW IN    Anywhere
+443                        ALLOW IN    Anywhere
+22 (v6)                    ALLOW IN    Anywhere (v6)
+80 (v6)                    ALLOW IN    Anywhere (v6)
+443 (v6)                   ALLOW IN    Anywhere (v6)
+
+```
+### 部署遇到的新名詞（如：LAMP）
 一開始挺摸不著頭緒的，在[鳥哥私房菜](http://linux.vbird.org/linux_server/0360apache.php)裡看了很多關於 LAMP、Apache 還有一些網路知識，裡面的文字深入淺出，很白話。
 
 過程中遇到滿多 ubuntu 上的執行錯誤，就開始 google 查詢問題所在，其實都滿零碎的，有時候想要解決錯誤到已經迷失了方向，不知道現在做到哪了，所以只好暴力砍掉重新架設 AWC EC2 server。
