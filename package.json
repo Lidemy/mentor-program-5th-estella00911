@@ -33,8 +33,6 @@
     "lint-staged": "^10.5.4"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-balloon-block": "^28.0.0",
-    "@ckeditor/ckeditor5-build-classic": "^28.0.0",
     "request": "^2.88.2"
   }
 }
