@@ -71,7 +71,7 @@
               src='./resources/icons_func/login.svg'>Login</a></li>
         <?php } ?>
         <?php if ($username) { ?>
-        <li class='navbar__blog-control navbar__style'><a href='#'><img class='icon__nav-style'
+        <li class='navbar__blog-control navbar__style'><a href='logout.php'><img class='icon__nav-style'
               src='./resources/icons_func/logout.svg'>Logout</a></li>
         <?php } ?>
       </ul>
@@ -80,7 +80,7 @@
     <div class='navbar__admin'>
       <ul>
         <?php if ($username) { ?>
-        <li class='navbar__blog-control navbar__style'><a href='./blog_edit.php'><img class='icon__nav-style'
+        <li class='navbar__blog-control navbar__style'><a href='./add_post.php'><img class='icon__nav-style'
               src='./resources/icons_func/plus.svg'>New Post</a></li> 
         <?php } ?>
         <?php if ($user_admin) { ?>

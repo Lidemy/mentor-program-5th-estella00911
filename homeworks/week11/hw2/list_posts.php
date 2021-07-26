@@ -146,7 +146,7 @@
   </footer>
 
   <script>
-    let urlBase = 'https://mentor-program.co/mtr04group2/jean/week11/hw1';
+    let urlBase = 'http://estella00911.tw/w11_blog';
     let article_post = document.querySelectorAll('.article__post');
     for (let i = 0; i < article_post.length; i++) {
       article_post[i].addEventListener('click', function(e){
