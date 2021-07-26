@@ -6,7 +6,6 @@
   $username = NULL;
   $user_admin = NULL;
 
-
   if (!empty($_SESSION['username'])) {
     $username = $_SESSION['username'];
     if ($username === 'admin') {
@@ -14,28 +13,16 @@
     }
   }
 
-  $page = NULL;
-    if (empty($_GET['page'])) {
-    $page = 1;
-  } else {
-    $page = $_GET['page'];
-  }
-
-  $limit_per_page = 5;
-  $offset = ($page - 1) * $limit_per_page;
-
-  $sql = "SELECT * FROM `jean_w11_blog_posts` WHERE is_deleted is NULL ORDER BY id DESC LIMIT ? OFFSET ?";
+  $sql = "SELECT * FROM `jean_w11_blog_posts` WHERE is_deleted is NULL ORDER BY id DESC";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param('ii', $limit_per_page, $offset);
   $result = $stmt->execute();
+  $result = $stmt->get_result();
   if (!$result) {
     echo $conn->error;
     die();
   }
-  $result = $stmt->get_result();
-
+  
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,17 +58,16 @@
           <a href="#"><div class='icon__nav-style icon__facebook'></div></a>
         </li>
         <li class='navbar__social-media navbar__style'>
-          <a href=""><div class='icon__nav-style icon__linkedin'></div></a>
+          <a href="#"><div class='icon__nav-style icon__linkedin'></div></a>
         </li>
         <li class='navbar__social-media navbar__style'>
           <a href="https://github.com/estella00911"><div class='icon__nav-style icon__github'></div></a>
-        </li>
         <?php if(!$username) { ?>
-          <li class='navbar__blog-control navbar__style'><a href='login.php'><img class='icon__nav-style'
+          <li class='navbar__blog-control navbar__style'><a href='./login.php'><img class='icon__nav-style'
               src='./resources/icons_func/login.svg'>Login</a></li>
         <?php } ?>
         <?php if ($username) { ?>
-          <li class='navbar__blog-control navbar__style'><a href='logout.php'><img class='icon__nav-style'
+        <li class='navbar__blog-control navbar__style'><a href='./logout.php'><img class='icon__nav-style'
               src='./resources/icons_func/logout.svg'>Logout</a></li>
         <?php } ?>
       </ul>
@@ -91,9 +77,9 @@
       <ul>
         <?php if ($username) { ?>
         <li class='navbar__blog-control navbar__style'><a href='./add_post.php'><img class='icon__nav-style'
-              src='./resources/icons_func/plus.svg'>New Post</a></li> 
+              src='./resources/icons_func/plus.svg'>New Post</a></li>
         <?php } ?>
-        <?php if ($user_admin) { ?>
+        <?php if ($user_admin) { ?> 
         <li class='navbar__blog-control navbar__style'><a href='./blog_admin.php'><img class='icon__nav-style'
               src='./resources/icons_func/user.svg'>Admin</a></li>
         <?php } ?>
@@ -111,19 +97,18 @@
     <section class='section__posts wrapper font-Serif-TC'>
       <div class='article__lists'>
         <?php while($row = $result->fetch_assoc()) { ?>
-        <div class='article__post'>
-          <div class='article__photo'></div>
-          <div class='article__body'>
-            <div class='article__info'>
+        <div class='article__post' id='<?php echo escape($row['id']); ?>'>
+          <div class='article__photo article__photo-admin'></div>
+          <div class='article__body article__body-admin'>
+            <div class='article__title article__title-admin'><?php echo escape($row['title']); ?></div>
+            <div class='article__info article__date-admin'>
               <div class='icon__post-style icon__clock'></div>
               <div class='article__date font-Merri'><?php echo escape($row['created_at']); ?></div>
+            </div>
+            <div class='article__info article__catelog-admin'>
               <div class='icon__post-style icon__folder'></div>
               <div class='article__category'><?php echo escape($row['category']); ?></div>
             </div>
-            <div class='article__title'><?php echo escape($row['title']); ?></div>
-            <div class='article__content ellipsis'><?php echo ($row['content']); ?></div>
-            <a class='article__btn-style' href='post_page.php?id=<?php echo $row['id'] ?>'><div class='btn__read-more font-Merri'>Read More <img class='icon__edit-style'
-                src='./resources/icons_func/ellipsis.svg'></div></a>
           </div>
           <?php if($user_admin) { ?>
           <div class='article__btn-position font-Merri'>
@@ -143,36 +128,13 @@
         <!-- 分隔線 -->
         <div class='article__dividing-line'></div>
       <?php } ?>
-        <!-- 分隔線 -->
         <!-- 新增文章，也要連 dividing line ＋ 文章本身，一起新增         
         <div class='article__dividing-line'></div>
         <div class='article__post'>
         </div> 
       -->
+
       </div>
-      <?php
-       $sql_page =
-          'SELECT ' .
-          'count(id) as count ' .
-          'FROM jean_w11_blog_posts '.
-          'WHERE is_deleted is NULL';
-        $stmt = $conn->prepare($sql_page);
-        $result = $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $total_comments = $row['count'];
-        $total_page = ceil($total_comments / $limit_per_page);
-      ?>
-      <div class='page__area'>
-        <?php if($page != 1) { ?>
-        <a class='page__icon-style page__icon-first' href='index.php'>&lt;&lt;</a>
-        <a class='page__icon-style page__icon-previous' href='index.php?page=<?php echo $page-1; ?>'>&lt;</a>
-        <?php } ?>
-        <?php if ($page != $total_page) { ?>
-        <a class='page__icon-style page__icon-next' href='index.php?page=<?php echo $page+1; ?>'>
-&gt;</a>
-        <a class='page__icon-style page__icon-last' href='index.php?page=<?php echo $total_page; ?>'>&gt;&gt;</a>
-        <?php } ?>
     </section>
   </main>
   <footer>
@@ -182,6 +144,23 @@
           perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
   </footer>
+
+  <script>
+    let urlBase = 'https://mentor-program.co/mtr04group2/jean/week11/hw1';
+    let article_post = document.querySelectorAll('.article__post');
+    for (let i = 0; i < article_post.length; i++) {
+      article_post[i].addEventListener('click', function(e){
+      console.log(e.target);
+      console.log(e.currentTarget.id);
+      location.href = `${urlBase}/post_page.php?id=${e.currentTarget.id}`;
+      });
+    };
+  </script>
 </body>
 
 </html>
+
+
+
+
+<!-- <li class='navbar__admin'><a href='#'>Login</a></li> -->
