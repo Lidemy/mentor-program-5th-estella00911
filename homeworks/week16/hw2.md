@@ -8,4 +8,4 @@ for(var i=0; i<5; i++) {
   }, i * 1000)
 }
 ```
-![](./resources/hw2_eventLoop_Scope.gif)
+![](https://github.com/Lidemy/mentor-program-5th-estella00911/blob/week16/homeworks/week16/resources/hw2_eventLoop_Scope.gif?raw=true)

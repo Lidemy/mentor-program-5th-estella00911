@@ -27,5 +27,5 @@ cosplay JS 引擎
 ```
 global EC 建立 → VO 建立 → 找參數、func → 有 func 建立 <funcName>.[[Scope]] → 執行 code
                                                                        → 沒有參數，繼續下一個 execution context                                                                    ```
-![](./resources/hw3_hoisting.gif)                                                                     
+![](https://github.com/Lidemy/mentor-program-5th-estella00911/blob/week16/homeworks/week16/resources/hw3_hoisting.gif?raw=true)                                                                     
                                                                        
