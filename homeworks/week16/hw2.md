@@ -8,4 +8,4 @@ for(var i=0; i<5; i++) {
   }, i * 1000)
 }
 ```
-![](./hw2_eventLoop_Scope.gif)
+![](./resources/hw2_eventLoop_Scope.gif)

@@ -27,3 +27,5 @@ cosplay JS 引擎
 ```
 global EC 建立 → VO 建立 → 找參數、func → 有 func 建立 <funcName>.[[Scope]] → 執行 code
                                                                        → 沒有參數，繼續下一個 execution context                                                                    ```
+![](./resources/hw3_hoisting.gif)                                                                     
+                                                                       
