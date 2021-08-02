@@ -11,7 +11,7 @@ setTimeout(() => {
 }, 0)
 console.log(5)
 ```
-![](./resources/hw1_eventLoop.gif)
+![](hw1_eventLoop.gif)
 
 * JavaScript 
 JavaScript 為 single-threaded（單線執行緒），意思就是只會有一個單線的流程，流程裡有很多項任務，在沒有執行任何同步程式碼的前提下，一次只會照著順序執行一項任務（同步synchronous)，當執行到比較費時的任務時，要完成此項費時任務，才可以往後執行後面的任務，而這些後面的任務，此時就處在「等待」狀態。
