@@ -1,0 +1,24 @@
+@mixin background-image($path--rel,$img) {
+	background-image: url('#{$path--rel}/#{$img}');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+@mixin image-size($size, $min:none) {
+	height: $size;
+	width: $size;
+	min-width: $min;
+}
+
+%btn-pink-style {
+	background: $btn-light-pink;
+	border: 2px solid $btn-medium-pink;
+	border-radius: 10px;
+	padding: 0 20px;
+}
+
+@mixin pagination-position($left-percent) {
+	transform: translate(50%, 0px);
+	left: $left-percent
+}
