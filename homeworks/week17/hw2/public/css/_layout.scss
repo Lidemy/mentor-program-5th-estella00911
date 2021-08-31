@@ -1,0 +1,112 @@
+h2 {
+	margin: 0;
+}
+
+.navbar {
+	box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+
+  > .wrapper { /* .navbar .wrapper*/
+    display: flex; /*1.左右並排*/
+    justify-content: space-between;  /*元素內：向兩側推開*/
+    align-items: center; /*在方塊內 row 置中*/
+    height: 84px;
+    background: white;
+    padding: 0 20px;
+    text-align: center;
+  }
+  &__site-name {
+    color: #489846;
+    font-size: 36px;
+  }
+&__list {
+	list-style: none; /*2. 把討厭的 ul 符號關掉*/
+	margin: 0; /*3. 關掉討厭的瀏覽器預設：margin, padding*/
+	padding:0;
+	display: flex;  /*flex-direction: row 預設*/
+	font-size: 17px;
+}
+
+  &__list li {
+    margin-left: 12px;
+    border-radius: 8px;
+    transition: background 0.1s ease-in; /*漸變效果*/
+
+    /*OK*/
+    &.active {
+      background: #ff7286;
+    }
+    &:hover {
+      background: #ff7286;
+    }
+    
+    &.active a {
+      color: white;
+    }
+
+    &:hover a  {
+      color: white;
+    }
+
+    > a {
+      display: block;
+      text-decoration: none; /*預設為 underline 改為樣式無*/
+      color: black;
+      padding: 12px 24px;
+    }
+  }
+}
+
+.wrapper {
+	max-width: 1920px;
+	margin: 0 auto; /*上下 0 左右 auto*/
+	padding: 0 12px;
+}
+
+.banner {
+    height: 450px;
+    background: url('/public/images/2.jpg') center/cover no-repeat; /*從tinypng壓縮過的圖*/
+    position: relative; /*給偽元素黑色半透明框定：相對位置*/
+    padding: 0 12px;
+  &:after {
+    content: '';
+    position: absolute; /*跳脫排版流的定位：絕對位置*/
+    background: rgba(0,0,0,0.3);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    }
+  > h1 {
+    margin: 0; /*與 navbar 之間不留空隙*/
+    color: white;
+    position: relative; /*給偽元素黑色半透明框定：相對位置*/
+    z-index: 2;
+    /*以下為置中央的調整，不太懂為啥要 inline-block 以及其與下三個關系*/
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    font-weight: bold;
+  }
+}
+
+/*OK*/
+.section {
+	text-align: center;
+	margin-top: 80px;
+
+  &__title {
+    display: inline-block;  /*why使用 讓他對齊？*/
+    font-size: 36px;
+    border-left: 15px solid #a3dea2;
+    margin-bottom: 36px;
+    padding-left: 16px;
+  }
+
+  &__desc {
+    font-size: 16px;
+    line-height: 2em; /*這個fontsize 16的兩倍*/
+    margin: 0px 0px 68px 0px;
+  }
+}
