@@ -3,7 +3,7 @@
       <ul>
         <li class='navbar__list navbar__style'><a href='/'>Home</a></li>
         <li class='navbar__list navbar__style'><a href='/'>Blog</a></li>
-        <li class='navbar__list navbar__style'><a href='/list_articles'>Archives</a></li>
+        <li class='navbar__list navbar__style'><a href='/list-articles'>Archives</a></li>
         <li class='navbar__list navbar__style'><a href='#'>Category</a></li>
         <li class='navbar__list navbar__style'><a href='#'>About</a></li>
       </ul>
@@ -35,11 +35,11 @@
     <div class='navbar__admin'>
       <ul>
         <%if (username) { %>
-        <li class='navbar__blog-control navbar__style'><a href='/add_article'><img class='icon__nav-style'
+        <li class='navbar__blog-control navbar__style'><a href='/add-article'><img class='icon__nav-style'
               src='/public/images/icons_func/plus.svg'>New Post</a></li> 
         <% } %>
         <% if (username === 'admin') { %>
-        <li class='navbar__blog-control navbar__style'><a href='/blog_admin'><img class='icon__nav-style'
+        <li class='navbar__blog-control navbar__style'><a href='/blog-admin'><img class='icon__nav-style'
               src='/public/images/icons_func/user.svg'>Admin</a></li>
         <% } %>
       </ul>

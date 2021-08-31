@@ -4,8 +4,8 @@ const { Article } = db
 const { User } = db
 
 const blogController = {
-  homePage: (req, res) => {
-    Article.findAll({
+  homePage: async(req, res) => {
+    const article = await Article.findAll({
       where: {
         is_deleted: null
       },
@@ -13,17 +13,16 @@ const blogController = {
       include: User
       // offset: 5,
       // limit: 5
-    }).then((article) => {
-      // console.log(JSON.stringify(article,null,4))
-      res.render('index', {
-        article
-      })
+    })
+    // console.log(JSON.stringify(article,null,4))
+    res.render('index', {
+      article
     })
   },
   pageAdd: (req, res) => {
     res.render('add_article')
   },
-  add: (req, res) => {
+  add: async(req, res) => {
     const { title, category, content } = req.body
     const { UserId, username } = req.session
 
@@ -32,12 +31,21 @@ const blogController = {
       return res.redirect('back')
     }
 
-    User.findOne({
-      where: {
-        username
-      }
-    }).then(() => {
-      Article.create({
+    try {
+      await User.findOne({
+        where: {
+          username
+        }
+      })
+    } catch (err) {
+      console.log('not found!') // 沒有登入，也就是 !user 會跳出的錯誤訊息
+      req.flash('errorMessage', 'Please login before add a new post') // req.session.username 與資料庫 User 不符
+      res.redirect('back')
+      return
+    }
+
+    try {
+      await Article.create({
         title,
         category,
         content,
@@ -46,85 +54,107 @@ const blogController = {
         include: [
           { model: User }
         ]
-      }).then(() => res.redirect('/')).catch((err) => {
-        req.flash('errorMessage', err.toString())
       })
-    }).catch((err) => {
-      req.flash('errorMessage', 'Please login before add a new post') // req.session.username 與資料庫 User 不符
-      res.redirect('back')
-    })
+      res.redirect('/')
+    } catch (err) {
+      req.flash('errorMessage', err.toString())
+    }
   },
-  article: (req, res) => {
-    Article.findOne({
+  articlePage: async(req, res) => {
+    const article = await Article.findOne({
       where: {
         id: req.params.id,
         is_deleted: null
       }
-    }).then((article) => {
-      res.render('article_page', {
-        article
-      })
+    })
+
+    res.render('article_page', {
+      article
     })
   },
-  delete: (req, res) => {
+  delete: async(req, res) => {
     const { UserId } = req.session
-    Article.findOne({
-      where: {
-        id: req.params.id,
-        UserId
-      }
-    }).then((article) => article.update({
-      is_deleted: 1
-    })).then(() => {
+    try {
+      const article = await Article.findOne({
+        where: {
+          id: req.params.id,
+          UserId
+        }
+      })
+      await article.update({
+        is_deleted: 1
+      })
       res.redirect('/')
-      res.sendStatus(200)
-    }).catch((err) => {
+    } catch (err) {
       res.redirect('back')
-    })
+    }
   },
-  pageUpdate: (req, res) => {
-    Article.findOne({
-      where: {
-        id: req.params.id
-      }
-    }).then((article) => {
+  pageUpdate: async(req, res) => {
+    try {
+      const article = await Article.findOne({
+        where: {
+          id: req.params.id
+        }
+      })
       res.render('update_article', {
         article
       })
-    })
+    } catch (err) {
+      res.redirect('back')
+    }
   },
-  update: (req, res) => {
+  update: async(req, res) => {
     const { title, category, content } = req.body
     const { UserId } = req.session
-    Article.findOne({
-      where: {
-        id: req.params.id,
-        UserId
-      }
-    }).then((article) => article.update({
-      title,
-      category,
-      content
-    })).then((record) => {
-      res.redirect('/')
-    }).catch((err) => {
+    try {
+      const article = await Article.findOne({
+        where: {
+          id: req.params.id,
+          UserId
+        }
+      })
+      await article.update({
+        title,
+        category,
+        content
+      })
+      await res.redirect('/')
+    } catch (err) {
       req.flash('errorMessage', 'You are not authorized to edit this post')
       res.redirect('back')
-    })
+    }
   },
-  list: (req, res) => {
-    Article.findAll({
-      where: {
-        is_deleted: null
-      },
-      order: [['id', 'DESC']],
-      include: User
-    }).then((article) => {
+  list: async(req, res) => {
+    try {
+      const article = await Article.findAll({
+        where: {
+          is_deleted: null
+        },
+        order: [['id', 'DESC']],
+        include: User
+      })
       res.render('list_articles', {
         article
       })
-    }).catch((err) => {
-    })
+    } catch (err) {
+      console.log(err.toString())
+    }
+  },
+  blogAdmin: async(req, res) => {
+    try {
+      const article = await Article.findAll({
+        where: {
+          is_deleted: null
+        },
+        order: [['id', 'DESC']],
+        include: User
+      })
+      res.render('blog_admin', {
+        article
+      })
+    } catch (err) {
+      console.log(err.toString())
+    }
   }
 }
 

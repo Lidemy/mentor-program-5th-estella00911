@@ -21,29 +21,26 @@ const userController = {
       return res.redirect('back')
     }
 
-    bcrypt.hash(password, saltRounds, (err, hash) => {
+    bcrypt.hash(password, saltRounds, async(err, hash) => {
       if (err) {
         req.flash('errorMessage', err.toString())
         return res.redirect('back')
       }
-
-      User.create({
+      const user = await User.create({
         username,
         password: hash
-      }).then((user) => {
-        req.session.username = username
-        req.session.UserId = user.id
-        res.redirect('/')
-      }).catch((err) => {
-        req.flash('errorMessage', 'the username provided is already registered')
-        res.redirect('back')
       })
+      req.session.username = username
+      req.session.UserId = user.id
+      res.redirect('/')
+      req.flash('errorMessage', 'the username provided is already registered')
+      res.redirect('back')
     })
   },
   login: (req, res) => {
     res.render('login')
   },
-  handleLogin: (req, res) => {
+  handleLogin: async(req, res) => {
     const { username, password } = req.body
 
     if (!username || !password) {
@@ -51,29 +48,30 @@ const userController = {
       return res.redirect('back')
     }
 
-    User.findOne({
+    const user = await User.findOne({
       where: {
         username
       }
-    }).then((user) => {
-      if (!user) {
-        req.flash('errorMessage', 'the username provided is not registered')
+    })
+
+    if (!user) {
+      req.flash('errorMessage', 'the username provided is not registered')
+      return res.redirect('back')
+    }
+
+    bcrypt.compare(password, user.password, (err, result) => {
+      if (err || !result) {
+        req.flash('errorMessage', 'Incorrect Password')
         return res.redirect('back')
       }
-      bcrypt.compare(password, user.password, (err, result) => {
-        if (err || !result) {
-          req.flash('errorMessage', 'Incorrect Password')
-          return res.redirect('back')
-        }
-        req.session.UserId = user.id
-        req.session.username = user.username
-        return res.redirect('/')
-      })
+      req.session.UserId = user.id
+      req.session.username = user.username
+      return res.redirect('/')
     })
   },
-  logout: (req, res) => {
-    req.session.destroy()
-    res.redirect('/')
+  logout: async(req, res) => {
+    await req.session.destroy()
+    await res.redirect('/')
   }
 }
 

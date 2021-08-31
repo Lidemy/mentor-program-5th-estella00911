@@ -12,7 +12,7 @@
     <section class='newPost_board font-Noto-Sans'>
       <!-- article__post-->
       <h2 class='font-Merri newPost__site-name'>Add a New Blog Post</h2>
-      <form method='POST' action='./add_article' class='newPost__newPost-form' onsubmit="return myFunction();">
+      <form method='POST' action='./add-article' class='newPost__newPost-form' onsubmit="return myFunction();">
         <input type='text' class='newPost__add-title' name='title' placeholder='Title'></input>
         <!-- for add new category-->
         <!-- <div class='newPost__category'> -->
@@ -43,23 +43,6 @@
       .catch(error => {
         console.error(error);
       });
-
-      // CKEDITOR.editorConfig = function( config ) {
-      //   config.allowedContent = {
-      //       script: true,
-      //       $1: {
-      //           // This will set the default set of elements
-      //           elements: CKEDITOR.dtd,
-      //           attributes: true,
-      //           styles: true,
-      //           classes: true
-      //       }
-      //   };
-      // };
-    //   config.allowedContent =
-    // 'h1 h2 h3 p blockquote strong em;' +
-    // 'a[!href];' +
-    // 'img(left,right)[!src,alt,width,height];';
   </script>
 </body>
 
