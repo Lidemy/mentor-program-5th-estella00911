@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     prizeDesc: DataTypes.STRING,
     imageURL: DataTypes.STRING,
     prizeAmount: DataTypes.INTEGER,
-    prizeProbability: DataTypes.DECIMAL(10, 2)
+    prizeProbability: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Prize'

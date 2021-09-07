@@ -26,7 +26,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       prizeProbability: {
-        type: Sequelize.DECIMAL(10, 2)
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

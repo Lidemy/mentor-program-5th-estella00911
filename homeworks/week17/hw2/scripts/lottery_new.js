@@ -6,7 +6,7 @@ const lottery = {
   drawLottery: (prize, minUnit) => { // data, 0.01(unit:%)
     const prizeWeight = [0]
     const unit = 1 // =% = percent
-    const totalSamples = 1 / unit / minUnit
+    const totalSamples = 1 / unit / minUnit * 100 // (機率 1) * (100%/1) = 100%
     const unitSamples = 1 / minUnit
     let sumSamples = 0
     const arrSamples = []
@@ -15,6 +15,7 @@ const lottery = {
       const samples = parseInt(prize[i].prizeProbability) * unitSamples
       prizeWeight[i] = samples
       sumSamples += samples
+
       for (let j = 0; j < samples; j++) {
         arrSamples.push(i)
       }

@@ -79,6 +79,7 @@ h2 {
 .navbar__site-name {
   color: #489846;
   font-size: 36px;
+  text-decoration: none;
 }
 .navbar__list {
   list-style: none;

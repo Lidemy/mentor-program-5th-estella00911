@@ -84,6 +84,7 @@ const prizeController = {
     }
   },
   updatePage: async(req, res, next) => {
+    const { id } = req.params
     const prize = await Prize.findAll({
       order: [['prizeOrder', 'ASC']]
     })
@@ -91,6 +92,7 @@ const prizeController = {
 
     res.render('updateLottery', {
       prize,
+      id,
       probabilityOfNoPrize
     })
   },

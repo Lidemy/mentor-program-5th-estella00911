@@ -25,21 +25,21 @@
 		  	</tr>
 			 
 		  	<% for (let i = 0; i < prize.length ; i++) { %>
-		  	<% if (id == parseInt(prize[i].id)) { %>
-		  	    <tr>
-			  	<form method='post' action='/update-lottery/<%= prize[i].id %>'>
-				    <td><input type='number' min='0' max='100'  size='2' name='prizeOrder' placeholder='n+1' value='<%= prize[i].prizeOrder%>'></input></td>
-				    <td><input type='text' size='5' name='prizeName' placeholder='n 獎' value='<%= prize[i].prizeName%>'></input></td>
-				    <td>
-				    	<div><input type='text' size='20' name='prizeItem' placeholder='品名' value='<%= prize[i].prizeItem%>'></input></div>
-				    	<div><input type='text' size='20' name='prizeDesc' placeholder='敘述' value='<%= prize[i].prizeDesc%>'></input></div>
-				    </td>
-				    <td><input type='url' size='15' name='imageURL' placeholder="http://www.example.com" value='<%= prize[i].imageURL%>'></input></td>
-				    <td><input type='number' min='0' max='100'  size='2' name='prizeAmount' placeholder='幾' value='<%= prize[i].prizeAmount%>'></input> 位</td>
-				    <td><input type='number' min='0' max='100' size='2' name='prizeProbability' placeholder='9'value='<%= prize[i].prizeProbability%>'></input> %</td>
-				    <td><button type='submit' class='back-stage__btn'>更新</button></td>
-			  	</form>
-			  </tr>
+		  		<% if (id == parseInt(prize[i].id)) { %>
+			  	  <tr>
+				  		<form method='post' action='/update-lottery/<%= prize[i].id %>'>
+						    <td><input type='number' min='0' max='100'  size='2' name='prizeOrder' placeholder='n+1' value='<%= prize[i].prizeOrder%>'></input></td>
+						    <td><input type='text' size='5' name='prizeName' placeholder='n 獎' value='<%= prize[i].prizeName%>'></input></td>
+						    <td>
+						    	<div><input type='text' size='20' name='prizeItem' placeholder='品名' value='<%= prize[i].prizeItem%>'></input></div>
+						    	<div><input type='text' size='20' name='prizeDesc' placeholder='敘述' value='<%= prize[i].prizeDesc%>'></input></div>
+						    </td>
+						    <td><input type='url' size='15' name='imageURL' placeholder="http://www.example.com" value='<%= prize[i].imageURL%>'></input></td>
+						    <td><input type='number' min='0' max='100'  size='2' name='prizeAmount' placeholder='幾' value='<%= prize[i].prizeAmount%>'></input> 位</td>
+						    <td><input type='number' min='0' max='100' size='2' name='prizeProbability' placeholder='9'value='<%= prize[i].prizeProbability%>'></input> %</td>
+						    <td><button type='submit' class='back-stage__btn'>更新</button></td>
+				  		</form>
+				  	</tr>
 		  	<% } else { %>
 			  <tr>
 			    <td><%= prize[i].prizeOrder%></td>
