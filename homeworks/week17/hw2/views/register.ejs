@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<%- include('./template/head')%>
+</head>
+
+<body>
+	<%- include('./template/navbar')%>
+	<section class='section__lottery'>
+		<div class='lottery__bg'>
+			<div class='login__body'>
+				<form method='POST' action='/register'>
+					<h2 class='lottery__title login__title'>註冊</h2>
+				<div class='lottery__info'>
+					<div class='login__row'>
+						<div class='lottery__header'>帳號：</div>
+						<input type='text' name='username' class='lottery__text'></input>
+					</div>
+					<div class='login__row'>
+						<div class='lottery__header'>密碼：</div>
+						<input type='password' name='password' class='lottery__text'></input>
+					</div>
+					<div class='login__row'>
+						<div class='login__text lottery__text'>我已經註冊過帳號，按此<a href='/login'>登入</a></div>
+					</div>
+					<div class='login__text lottery__text errMsg__text'><%= errorMessage %></div>
+				</div>
+				<input type='submit' class='lottery__btn lottery__btn-drawing' value='註冊'></input>
+			</div>
+		</div>
+	</section>
+	<%- include('./template/footer')%>
+</body>
+
+</html>

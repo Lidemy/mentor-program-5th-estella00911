@@ -1,0 +1,507 @@
+// font-size, font-family, picture-path
+@import '_base';
+
+// icon-file, mixin(background-image)
+@import '_component';
+
+// navbar, site, footer
+@import '_layout';
+
+// mixin, extend
+@import '_mixin';
+
+
+
+/*Menu 搶先看*/
+.section__images {
+	display: flex;
+  + div {
+    width: 25%;
+  }
+  
+  + img {
+    width: 100%;
+  }
+}
+
+/* comment */
+.section {
+  &__all-comments {
+    margin:0 84px;
+    > h2 {
+      margin-bottom: 98px;
+    }
+  }
+
+  &__comments {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.comment {
+	max-width: 30%;
+	position: relative;
+
+  &__author {
+    margin: 0;
+    padding:0;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    z-index: 2;
+  }
+  
+  &__avatar img{
+    height: 105px;
+    width: 105px;
+  }
+  
+  &__author p {
+    font-size: 14px;
+    letter-spacing: 0.14px;
+    margin: 4px 0px 23px 0px;
+  }
+  
+  &__content {
+    font-size: 16px;
+    line-height: 170%;
+    text-align: center;
+    background: white;
+    border: solid 1px #c7e5ec;
+    border-radius: 5px;
+    display: flex;
+    box-sizing: border-box;
+    height: 216px;
+    overflow: scroll;
+    padding-bottom: 39px;
+    padding-top: 93px;
+    padding-left: 22px;
+    padding-right: 22px;
+    box-shadow: -1.4px -1.4px 4px #d8eaef;
+  }
+  
+  
+  & + .comment {
+    margin-left: 16px;
+  }
+}
+
+/*自己試做 section FAQ*/
+.section {
+  &__content {
+    width: 42%;
+    margin:0 auto;
+    margin-bottom: 41px;
+  }
+
+  &__question {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    padding-top: 29px;
+    padding-bottom: 24px;
+  }
+
+  &__Q-And-A {
+    border-bottom: 1px solid #a6e2c0;
+    padding-bottom: 4px;
+  }
+
+  &__ques-list {
+    color: #70b282;
+    font-size: 24px;
+    padding: 0 17px 0 17px;
+    width: 35px;
+  }
+
+  &__ques-desc {
+    font-size: 18px;
+    /*position: relative;*/
+  }
+
+  &__answer{
+    font-size: 16px;
+    letter-spacing: 0.14px;
+    /*position: absolute;*/
+    width: 90%;
+    padding-bottom: 41px;
+    padding-left: 68px;
+    text-align: left;
+    line-height: 27px;
+  }
+}
+
+.fold {
+  display: none;
+}
+
+.lottery {
+  &__title {
+    font-size: 24px;
+    color: #5ec1b6;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0 10px 0;	
+    position: relative;
+  }
+  
+  &__bg {
+    background: url(/public/images/games-bn.jpg) center/cover no-repeat;
+    height: 767px;
+    position: relative;
+  }
+
+  &__btn-prize {
+    width: 10%;
+  }
+
+  /* end of diff codition */
+  &__body {
+    // width: 500px;
+    // height:560px;
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+  }
+    
+  &__info {
+    padding: 0 22px 0 22px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    border-bottom: solid 1px #cdcdcd;
+  }
+
+  &__header {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    color: #322929;
+    width: 20%;
+  }
+
+  &__text {
+    font-size: 16px;
+    text-align: left;
+    color: #322929;
+    line-height: 1.63;
+    width: 70%;
+  }
+
+  &__header, &__text {
+    margin: 20px 0;
+    padding: 0 0 0 10px;
+  }
+
+  &__btn {
+    text-decoration: none;
+    text-align: center;
+    border-radius: 8px;
+    height: 55px;
+    background: #e62a45;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%);
+    border: none;
+    line-height: 55px;
+  }
+
+  &__btn-drawing {
+    width: 80%;
+    margin: 20px 0;
+  }
+}
+
+.login {
+  &__row {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+  }
+  &__text {
+    margin: 20px auto;
+    padding: 0;
+    text-align: center;
+  }
+  &__body {
+    width: 500px;
+    height: 450px;
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.errMsg__text {
+  color: red;
+  font-weight: 700;
+}
+
+// .FIRST__bg {
+// 	background: url(/public/images/bg-FIRST.jpg) center/cover no-repeat;
+// 	height: 767px;
+// 	position: relative;
+// }
+// .SECOND__bg {
+// 	background: url(/public/images/bg-SECOND.jpg) center/cover no-repeat;
+// 	height: 767px;
+// 	position: relative;
+// }
+// .THIRD__bg {
+// 	background: url(/public/images/bg-THIRD.jpg) center/cover no-repeat;
+// 	height: 767px;
+// 	position: relative;
+// }
+
+.lottery-result {
+  &__bg {
+	background: black;
+	height: 767px;
+	position: relative;
+  }
+  &__body {
+      position: absolute;
+      border-radius: 16px;
+      width: 90%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 40px 0;
+    background: #ffffffc7;
+  }
+  &__title {
+    font-size: 44px;
+    font-weight: bold;
+    // font-size: 36px;
+    // color:white;
+    // -webkit-text-stroke: 1.5px black; 
+    text-align: center;
+    font-family: MicrosoftJhengHei;
+  }
+  &__desc {
+    text-align: center;
+    font-family: MicrosoftJhengHei;
+  }
+}
+
+//back-stage, updateLottery.ejs
+table {
+  border: solid 1px #c7e5ec;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+td, th {
+  border: solid 1px #c7e5ec;
+  color: #404060;
+  padding: 4px;		  
+}	
+
+td > a {
+  display: block;
+}
+td > div > input {
+  margin-bottom:  5px;
+}
+button {
+all: unset;
+}
+.ellipsis {
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.back-stage {
+  &__URL {
+    max-width: 75px;
+  }
+  &__length {
+    min-width: 250px;
+    max-width: 400px;
+  }
+  &__prize-item {
+    margin-bottom: 15px;
+  }
+  &__btn-box-model {
+    margin-bottom:  12px;
+  }
+  &__desc {
+    display: flex;
+    flex-direction: column;			
+  }
+  &__btn {
+    padding: 2px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    text-decoration: none;
+    color: black;
+    &:hover {
+      background: #ff7286;
+      color: white;
+    }
+  }
+}
+//
+
+@media (max-width: 1280px) {
+	.comment__content {
+		display: block;
+    overflow-x: auto;
+    white-space: pre-line;
+    height: 320px;
+	}
+	.section__all-comments {
+		margin:0 auto;
+	}
+}
+
+@media (max-width: 768px) {
+	/*OK*/
+	.navbar .wrapper {
+		height: 120px;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 0px;
+
+	}
+	.banner {
+		background: url(/public/images/2.jpg) left/cover no-repeat
+	}
+	/*OK*/
+	.navbar__site-name {
+		margin-top: 10px;
+	}
+	/*OK*/
+	.navbar__list {
+		display: flex;
+		width: 100%;
+	}
+	/*OK*/
+	.navbar__list li {
+		flex: 1; /*不懂是啥*/
+		margin-left: 0; /*沒效果*/
+		border-radius: 0;  /*沒效果*/
+		text-align: center
+	}
+	.btn-query {
+		margin-left: 0px;
+		margin-top: 16px;
+	}
+
+	.section__images {
+		flex-direction: column;
+	}
+	.section__images div {
+		width: 100%
+	}
+	.footer__top .wrapper {
+		flex-direction: column-reverse;
+	}
+
+	.footer__info {
+		margin-right: 0;
+		margin-top: 16px;
+	}
+	/* comment */
+	.section__all-comments h2 {
+    margin-bottom: 0;
+  }
+	.section__comments {
+	  flex-direction: column;
+  }
+  .comment + .comment {
+	  margin-left: 0;
+  }
+  .section__all-comments {
+  	margin: 0 auto;
+  }
+  .comment {
+  	max-width: 100%;
+  	margin-top: 80px;
+  }
+
+  .comment__content {
+  	padding-bottom: 12px;
+    padding-top: 66px;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 216px;
+  }
+
+	/*FAQ*/
+	.section__ques-list {
+		padding: 0 8px 0 8px;
+	}
+	.section__question {
+	    align-items: baseline;
+	    text-align: left;
+	    width: 98%;
+	    margin: 0 auto;
+	}
+
+	.section__content {
+		width: 100%;
+		margin:0;
+	}
+	.QA__ans-ul .section__answer {
+		width: 95%;
+		padding: 0;
+	}
+
+	.QA__ans-text .section__answer {
+		padding-left: 20px;
+	}
+	/*lottery*/
+	.lottery__body {
+		width: 100%;
+		height: auto;
+			padding-bottom: 20px;
+	}
+	.lottery__bg {
+		height: 750px;
+	}
+	
+	.lottery-result__bg {
+		height: 400px;
+	}
+	.lottery__row {
+		padding: 0;
+		margin: 15px 0;
+		display: block;
+	}
+
+	.lottery__title {
+		margin: 20px 0;
+		padding: 0 10px;
+	}
+
+	.lottery__header, .lottery__text{
+		width: 90%;
+		padding: 0 10px;
+		margin: 20px 0;
+	}
+
+	.lottery__btn {
+		width: 40%;
+	}
+
+	.phone__style {
+		display: block;
+		margin: 10px 0 0 0;
+	}
+}
+
