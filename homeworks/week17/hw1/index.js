@@ -6,18 +6,11 @@ const flash = require('connect-flash')
 const session = require('express-session')
 const moment = require('moment')
 
-const shortDateFormat = 'YYYY-MM-DD HH:mm' // 'ddd @ h:mmA'
+const shortDateFormat = 'YYYY-MM-DD HH:mm' // "ddd @ h:mmA"
 const app = express()
 
-let { SESSION_SECRET } = process.env
-if (SESSION_SECRET === null || SESSION_SECRET === '') {
-  SESSION_SECRET = 'keyboard cat'
-}
-
-let { port } = process.env
-if (port === null || port === '') {
-  port = 8000
-}
+const SESSION_SECRET = process.env.SESSION_SECRET || 'keyboard cat'
+const port = process.env.PORT || 3000
 
 const userController = require('./controllers/user')
 const blogController = require('./controllers/blog')
