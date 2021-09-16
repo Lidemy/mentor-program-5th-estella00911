@@ -6,13 +6,19 @@
 	$admin = NULL;
 	$admin_user = 'admin';
 
-  	$id = $_GET['id'];
+	if (empty($_GET['id']) {
+	  header("Location: index.php");
+	  die();
+	} else {
+		$id = $_GET['id'];
+	}
+  	
   	$username = $_SESSION['username'];
   	if ($username == $admin_user) {
 		$admin = $admin_user;
 	}
 
-if ($username == $admin) { // 權限為 admin 時的工作
+if ($username === $admin) { // 權限為 admin 時的工作
 		$sql = "UPDATE jean_comments SET is_deleted=1 where id=?";
 		$stmt = $conn->prepare($sql);	
 		$stmt->bind_param('i', $id);

@@ -1,3 +1,23 @@
+|             檔案        |        說明        |
+|---------------------------|---------------------|
+|  index.php       |  首頁 |
+|  utils.php       | 常用 function 如 htmlspecialchar |
+|  login.php       |  登入頁面|
+|  register.php       | 註冊頁面  |
+|  logout.php       |  登出功能|
+|  style.css       | CSS |
+|  add_post.php             |  新增文章頁面|
+|  list_posts.php       | 文章列表頁面 |
+|  resources       | 放置圖片的資料夾 |
+|  blog_admin.php       | 管理員的文章列表頁面 |
+|  update_post.php       | 編輯文章頁面 |
+|  post_page.php       | 一篇完整文章頁面 |
+|  handle__login.php        | 處理登入功能 |
+|  handle__update_post.php       | 處理編輯文章功能 |
+|  handle_login.php       | 處理登入功能 |
+|  handle__add_post.php       | 處理新增文章功能 |
+|  handle_register.php       |  |
+|  handle__delete_post.php       | 處理刪除文章功能 |
 <?php
   session_start();
   require_once('conn.php');
@@ -178,20 +198,20 @@
           <a class='pagi__btn-leftArrow pagi__btn-first' href='index.php'>
             <div class='pagi__img-leftArrow'></div><span>first</span>
           </a>
-          <a class='pagi__btn-leftArrow' href='index.php?page=<?php echo $page-1; ?>'>
+          <a class='pagi__btn-leftArrow' href='index.php?page=<?php echo escape($page-1); ?>'>
             <div class='pagi__img-leftArrow'></div><span>previous</span>
           </a>
         <?php } ?>
         <?php if ($page != $total_page) { ?>
-          <a class='pagi__btn-rightArrow' href='index.php?page=<?php echo $page+1; ?>'>
+          <a class='pagi__btn-rightArrow' href='index.php?page=<?php echo escape($page+1); ?>'>
             <div class='pagi__img-rightArrow'></div><span>next</span>
           </a>
-          <a class='pagi__btn-rightArrow pagi__btn-last' href='index.php?page=<?php echo $total_page; ?>'>
+          <a class='pagi__btn-rightArrow pagi__btn-last' href='index.php?page=<?php echo escape($total_page); ?>'>
             <div class='pagi__img-rightArrow'></div><span>last</span>
           </a>
         <?php } ?>
         </div>
-        <div class='pagi__info'>共有 <?php echo $total_comments; ?> 筆留言，頁數<?php echo ' ' . $page . ' / ' . $total_page; ?></div>
+        <div class='pagi__info'>共有 <?php echo escape($total_comments); ?> 筆留言，頁數<?php echo ' ' . escape($page) . ' / ' . escape($total_page); ?></div>
   </div>
   </main>
   <script>
