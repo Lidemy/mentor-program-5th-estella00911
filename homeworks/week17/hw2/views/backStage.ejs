@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <%- include('template/head') %>
+  <style>
+	</style>
+</head>
+
+<body>
+	<%- include('template/navbar') %>
+	<div class='wrapper'>
+		<section class='section'>
+			<h2 class='section__title'>抽獎項目管理</h2>
+			<div class='back-stage__desc'>
+			<p>獎項順序不可重複，最小單位設為 1 %</p>
+		</div>
+			<table>
+			  <tr>
+			    <th>順序</th>
+			    <th>獎項</th>
+			    <th>品名</th>
+			    <th>照片</th>
+			    <th>名額</th>
+			    <th>機率（%）</th>
+			    <th>編輯</th>
+		  	</tr>
+		  	<% for (let i = 0; i < prize.length ; i++) { %>
+			  <tr>
+			    <td><%= prize[i].prizeOrder%></td>
+			    <td><%= prize[i].prizeName%></td>
+			    <td><div class='back-stage__prize-item'><%= prize[i].prizeItem%></div><div><%= prize[i].prizeDesc%></div></td>
+			    <td class='ellipsis back-stage__URL' border=3>
+			    	<img src="<%= prize[i].imageURL%>" alt="" style="width:200px; height:auto;">
+			  </td>
+			    <td><%= prize[i].prizeAmount%> 位</td>
+
+			    <td>
+			    	<% if (prize[i].prizeOrder == 0) { %>
+			    		<%= probabilityOfNoPrize %>
+			    	<% } else { %>
+			    		<%=prize[i].prizeProbability%><% }%> %
+			    		</td>
+			    <% if (prize[i].prizeOrder !== 0) { %>
+			    <td><div class='back-stage__btn-box-model'><a href='/update-lottery/<%= prize[i].id%>' class='back-stage__btn'>編輯</a></div><div><a href='/delete-lottery/<%= prize[i].id%>'class='back-stage__btn'>刪除</a></div></td>
+			    <% } %>
+			  </tr>
+			  <% } %>
+			  <tr>
+			  	<form method='post' action='./back-stage'>
+				    <td><input type='number' min='0' max='100' size='2' name='prizeOrder' placeholder='n+1'></input></td>
+				    <td><input type='text' size='5' name='prizeName' placeholder='n 獎'></input></td>
+				    <td>
+				    	<div><input type='text' size='20' name='prizeItem' placeholder='品名'></input></div>
+				    	<div><input type='text' size='20' name='prizeDesc' placeholder='敘述'></input></div>
+				    </td>
+				    <td><input type='url' size='15' name='imageURL' placeholder="http://www.example.com"></input></td>
+				    <td><input type='number' min='0' max='100'  size='2' name='prizeAmount' placeholder='幾'></input> 位</td>
+				    <td><input type='number'  min='0' max='100' size='2' name='prizeProbability' placeholder='9'></input> %</td>
+				    <td><button type='submit' class='back-stage__btn'>新增</button></td>
+			  	</form>
+			  </tr>
+		</table>
+		
+		<p class='errMsg__text'><%= errorMessage%></p>
+		</section>
+	</div>
+	<%- include('template/footer') %>
+</body>
+</html>

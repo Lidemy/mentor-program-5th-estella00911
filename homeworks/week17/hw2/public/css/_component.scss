@@ -1,0 +1,65 @@
+.button {
+	font-size:36px;
+	padding: 60px 80px;
+	color: #3e613d;
+	display: inline-block;
+	border-radius: 10px;
+	cursor: pointer;
+  transition: transform 0.1s;
+
+  &:hover {
+    transition: scale(1.1);
+  }
+}
+
+.btn {
+  &-order {
+    background: #a8e8e1;
+  }
+  &-query {
+	  margin-left: 23px;
+	  background: #f9f9b5;
+  }
+}
+
+footer {
+	margin-top: 48px;
+}
+
+.footer {
+  &__top {
+    background: #e8efee;
+    padding: 32px;  /*因為 wrapper 已經給 padding 12px*/
+    color: #484848;
+  }
+
+  &__top .wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__info {
+    margin-right: 16px;
+  }
+
+  &__info div + div {  /*常用技巧，只有第二個開始的 div 才需要 margin-top*/
+    margin-top: 10px;
+  }
+
+  &__info div, &__social-media {
+    font-size: 14px;
+  }
+
+  &__site {
+    font-size: 36px;
+    color: #489846;
+  }
+
+  &__bottom {
+    background: #35564b;
+    color: white;
+    font-size: 16px;
+    padding: 12px;
+    text-align: center;
+  }
+}

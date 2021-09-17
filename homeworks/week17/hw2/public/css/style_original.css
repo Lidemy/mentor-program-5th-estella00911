@@ -1,0 +1,581 @@
+.navbar {
+	box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+}
+/*OK*/
+.navbar .wrapper {
+	display: flex; /*1.左右並排*/
+	justify-content: space-between;  /*元素內：向兩側推開*/
+	align-items: center; /*在方塊內 row 置中*/
+	height: 84px;
+	background: white;
+	padding: 0 20px;
+	text-align: center;
+}
+/*OK*/
+.wrapper {
+	max-width: 1920px;
+	margin: 0 auto; /*上下 0 左右 auto*/
+	padding: 0 12px;
+}
+/*OK*/
+.banner {
+	height: 450px;
+	background: url('./2.jpg') center/cover no-repeat; /*從tinypng壓縮過的圖*/
+  position: relative; /*給偽元素黑色半透明框定：相對位置*/
+  padding: 0 12px;
+}
+
+.banner:after {
+	content: ''
+	position: absolute;
+	background: rgba(0,0,0,0.3);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.banner h1 {
+	margin: 0; /*與 navbar 之間不留空隙*/
+	color: white;
+	position: relative; /*給偽元素黑色半透明框定：相對位置*/
+	z-index: 2;
+	/*以下為置中央的調整，不太懂為啥要 inline-block 以及其與下三個關系*/
+	display: inline-block;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 60px;
+	font-weight: bold;
+}
+/*OK*/
+h2 {
+	margin: 0;
+}
+/*OK*/
+.section {
+	text-align: center;
+	margin-top: 80px;
+}
+/*OK*/
+.section__title {
+	display: inline-block;  /*why使用 讓他對齊？*/
+	font-size: 36px;
+	border-left: 15px solid #a3dea2;
+	margin-bottom: 36px;
+	padding-left: 16px;
+}
+/*OK*/
+.section__desc {
+	font-size: 16px;
+	line-height: 2em; /*這個fontsize 16的兩倍*/
+	margin: 0px 0px 68px 0px;
+}
+/*OK*/
+.button {
+	font-size:36px;
+	padding: 60px 80px;
+	color: #3e613d;
+	display: inline-block;
+	border-radius: 10px;
+	cursor: pointer;
+  transition: transform 0.1s;
+}
+/*OK*/
+.button:hover {
+	transition: scale(1.1);
+}
+/*OK*/
+.btn-order {
+	background: #a8e8e1;
+	
+}
+/*OK*/
+.btn-query {
+	margin-left: 23px;
+	background: #f9f9b5;
+}
+
+/*OK*/
+.navbar__site-name {
+  color: #489846;
+  /*font-family: Quesstrial;*/
+  font-size: 36px;
+}
+/*OK*/
+.navbar__list {
+	list-style: none; /*2. 把討厭的 ul 符號關掉*/
+	margin: 0; /*3. 關掉討厭的瀏覽器預設：margin, padding*/
+	padding:0;
+	display: flex;  /*flex-direction: row 預設*/
+	font-size: 17px;
+}
+/*OK*/
+.navbar__list li {
+	margin-left: 12px;
+	border-radius: 8px;
+	transition: background 0.1s ease-in; /*漸變效果*/
+}
+/*OK*/
+.navbar__list li.active,
+.navbar__list li:hover {
+	background: #ff7286;
+}
+/*OK*/
+.navbar__list li.active a,
+.navbar__list li:hover a  {
+	color: white;
+}
+/*OK*/
+.navbar__list li a {
+	display: block;
+	text-decoration: none; /*預設為 underline 改為樣式無*/
+	color: black;
+	padding: 12px 24px;
+}
+/*Menu 搶先看*/
+/*Q1 如何變四張並排？*/
+.section__images {
+	display: flex;
+}
+
+.section__images div {
+	width: 25%;
+}
+
+.section__images img {
+	width: 100%;
+}
+
+footer {
+	margin-top: 48px;
+}
+
+.footer__top {
+	background: #e8efee;
+	padding: 32px;  /*因為 wrapper 已經給 padding 12px*/
+	color: #484848;
+}
+
+.footer__top .wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer__info {
+	margin-right: 16px;
+}
+
+.footer__info div + div {  /*常用技巧，只有第二個開始的 div 才需要 margin-top*/
+	margin-top: 10px;
+}
+
+.footer__info div, .footer__social-media {
+	font-size: 14px;
+}
+
+.footer__site {
+	font-size: 36px;
+	color: #489846;
+}
+
+.footer__bottom {
+	background: #35564b;
+	color: white;
+	font-size: 16px;
+	padding: 12px;
+	text-align: center;
+}
+/*--------------------------*/
+/*自己試做 section comments*/
+
+.section__all-comments h2 {
+	margin-bottom: 98px;
+}
+.section__comments {
+	display: flex;
+	justify-content: center;
+}
+
+.section__all-comments {
+	margin:0 84px;
+}
+.comment {
+	max-width: 30%;
+	position: relative;
+}
+
+.comment__author {
+	margin: 0;
+	padding:0;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -35%);
+	z-index: 2;
+}
+
+.comment__avatar img{
+	height: 105px;
+	width: 105px;
+}
+
+.comment__author p {
+	font-size: 14px;
+	letter-spacing: 0.14px;
+	margin: 4px 0px 23px 0px;
+}
+
+.comment__content {
+	font-size: 16px;
+	line-height: 170%;
+	text-align: center;
+	background: white;
+	border: solid 1px #c7e5ec;
+	border-radius: 5px;
+	display: flex;
+	box-sizing: border-box;
+	height: 216px;
+	overflow: scroll;
+	padding-bottom: 39px;
+	padding-top: 93px;
+	padding-left: 22px;
+	padding-right: 22px;
+	box-shadow: -1.4px -1.4px 4px #d8eaef;
+/*	padding-left:19px;
+	padding-right:24px;	*/
+}
+
+
+.comment + .comment {
+	margin-left: 16px;
+}
+/*end: 自己試做 section comments*/
+/*--------------------------*/
+/*--------------------------*/
+/*自己試做 section FAQ*/
+.section__content {
+	width: 42%;
+	margin:0 auto;
+	margin-bottom: 41px;
+}
+
+.section__question {
+	display: flex;
+  align-items: center;
+  padding: 0;
+  padding-top: 29px;
+  padding-bottom: 24px;
+}
+
+.section__Q-And-A {
+  border-bottom: 1px solid #a6e2c0;
+  padding-bottom: 4px;
+}
+
+.section__ques-list {
+	color: #70b282;
+	font-size: 24px;
+	padding: 0 17px 0 17px;
+	width: 35px;
+}
+
+.section__ques-desc {
+	font-size: 18px;
+	/*position: relative;*/
+}
+
+.section__answer{
+	font-size: 16px;
+	letter-spacing: 0.14px;
+	/*position: absolute;*/
+	width: 90%;
+	padding-bottom: 41px;
+	padding-left: 68px;
+	text-align: left;
+	line-height: 27px;
+}
+
+.fold {
+	display: none;
+}
+
+/*end: 自己試做 section FAQ*/
+/*--------------------------*/
+
+/*RWD 好像沒有縮成兩排*/
+@media (max-width: 1280px) {
+	.comment__content {
+		display: block;
+    overflow-x: auto;
+    white-space: pre-line;
+    height: 320px;
+	}
+	.section__all-comments {
+		margin:0 auto;
+	}
+}
+
+.lottery__title {
+	font-size: 24px;
+	color: #5ec1b6;
+	font-weight: bold;
+	text-align: center;
+	margin: 30px 0 10px 0;	
+	position: relative;
+}
+
+/* lottery */
+/* [drawing]: diff codition*/
+.lottery__bg {
+	background: url(./games-bn.jpg) center/cover no-repeat;
+	height: 767px;
+	position: relative;
+}
+
+.FIRST__bg {
+	background: url(./bg-FIRST.jpg) center/cover no-repeat;
+	height: 767px;
+	position: relative;
+}
+.SECOND__bg {
+	background: url(./bg-SECOND.jpg) center/cover no-repeat;
+	height: 767px;
+	position: relative;
+}
+.THIRD__bg {
+	background: url(./bg-THIRD.jpg) center/cover no-repeat;
+	height: 767px;
+	position: relative;
+}
+
+.NONE__bg {
+	background: black;
+	height: 767px;
+	position: relative;
+}
+
+.FIRST__body, .SECOND__body, .THIRD__body, .NONE__body {
+	position: absolute;
+	border-radius: 16px;
+	width: 100%;
+	left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.FIRST__title, .SECOND__title, .THIRD__title, .NONE__title {
+	font-size: 36px;
+	color: white;
+	-webkit-text-stroke: 1.5px black; 
+	text-align: center;
+	margin: 0 0 55px;
+	font-family: MicrosoftJhengHei;
+}
+
+.lottery__btn-prize {
+	width: 10%;
+}
+
+/* end of diff codition */
+.lottery__body {
+	width: 500px;
+	height:560px;
+	position: absolute;
+	background: white;
+	border-radius: 16px;
+	left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+	
+.lottery__info {
+	padding: 0 22px 0 22px;
+}
+
+.lottery__row {
+	display: flex;
+	align-items: baseline;
+	width: 100%;
+	border-bottom: solid 1px #cdcdcd;
+}
+
+.lottery__header {
+	font-size: 18px;
+ 	font-weight: bold;
+ 	text-align: left;
+ 	color: #322929;
+ 	width: 20%;
+}
+
+.lottery__text {
+	font-size: 16px;
+	text-align: left;
+	color: #322929;
+	line-height: 1.63;
+	width: 70%;
+}
+
+.lottery__header, .lottery__text {
+	margin: 20px 0;
+	padding: 0 0 0 10px;
+}
+
+.lottery__btn {
+	text-decoration: none;
+	text-align: center;
+	border-radius: 8px;
+	height: 55px;
+	background: #e62a45;
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+	position: relative;
+	top: 5%;
+	left: 50%;
+  transform: translate(-50%);
+  border: none;
+	line-height: 55px;
+}
+
+.lottery__btn-drawing {
+	width: 80%;
+}
+/*手機版 768 px 以下*/
+@media (max-width: 768px) {
+	/*OK*/
+	.navbar .wrapper {
+		height: 120px;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 0px;
+
+	}
+	.banner {
+		    background: url(./2.jpg) left/cover no-repeat
+	}
+	/*OK*/
+	.navbar__site-name {
+		margin-top: 10px;
+	}
+	/*OK*/
+	.navbar__list {
+		display: flex;
+		width: 100%;
+	}
+	/*OK*/
+	.navbar__list li {
+		flex: 1; /*不懂是啥*/
+		margin-left: 0; /*沒效果*/
+		border-radius: 0  /*沒效果*/
+		text-align: center;
+	}
+	.btn-query {
+		margin-left: 0px;
+		margin-top: 16px;
+	}
+
+	.section__images {
+		flex-direction: column;
+	}
+	.section__images div {
+		width: 100%;
+	}
+	.footer__top .wrapper {
+		flex-direction: column-reverse;
+	}
+
+	.footer__info {
+		margin-right: 0;
+		margin-top: 16px;
+	}
+	/* comment */
+	.section__all-comments h2 {
+    margin-bottom: 0;
+  }
+	.section__comments {
+	  flex-direction: column;
+  }
+  .comment + .comment {
+	  margin-left: 0;
+  }
+  .section__all-comments {
+  	margin: 0 auto;
+  }
+  .comment {
+  	max-width: 100%;
+  	margin-top: 80px;
+  }
+
+  .comment__content {
+  	padding-bottom: 12px;
+    padding-top: 66px;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 216px;
+  }
+
+	/*FAQ*/
+	.section__ques-list {
+		padding: 0 8px 0 8px;
+	}
+	.section__question {
+	    align-items: baseline;
+	    text-align: left;
+	    width: 98%;
+	    margin: 0 auto;
+	}
+
+	.section__ques-desc {
+
+	}
+	.section__content {
+		width: 100%;
+		margin:0;
+	}
+	.QA__ans-ul .section__answer {
+		width: 95%;
+		padding: 0;
+	}
+
+	.QA__ans-text .section__answer {
+		padding-left: 20px;
+	}
+	/*lottery*/
+	.lottery__body {
+		width: 100%;
+		height: auto;
+			padding-bottom: 20px;
+	}
+	.lottery__bg {
+		height: 750px;
+	}
+	
+	.FIRST_bg, .SECOND__bg, .THIRD__bg, .NONE__bg {
+		height: 400px;
+	}
+	.lottery__row {
+		padding: 0;
+		margin: 15px 0;
+		display: block;
+	}
+
+	.lottery__title {
+		margin: 20px 0;
+		padding: 0 10px;
+	}
+
+	.lottery__header, .lottery__text{
+		width: 90%;
+		padding: 0 10px;
+		margin: 20px 0;
+	}
+
+	.lottery__btn {
+		width: 40%;
+	}
+
+	.phone__style {
+		display: block;
+		margin: 10px 0 0 0;
+	}
+}
